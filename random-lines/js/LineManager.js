@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:37:26
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-05 17:27:22
+* @Last Modified time: 2019-08-07 12:16:11
 */
 
 class LineManager {
@@ -16,9 +16,10 @@ class LineManager {
 	addLine() {
 		let lineColor = color(random(50, 255));
 		let linePosition = random(0, height);
-		let lineSpeed = random(1, 8);
+		let lineSpeed = random(1, 15);
+		let lineWeight = random(2, 5);
 
-		this.lineList.push(new GlitchLine(lineColor, linePosition, lineSpeed));
+		this.lineList.push(new GlitchLine(lineColor, linePosition, lineSpeed, lineWeight));
 	}
 
 	draw() {

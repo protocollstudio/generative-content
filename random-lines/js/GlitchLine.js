@@ -2,16 +2,17 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:17:16
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-05 17:27:18
+* @Last Modified time: 2019-08-07 12:01:54
 */
 
 class GlitchLine {
 
-	constructor(color, position, speed) {
+	constructor(color, position, speed, weight) {
 		this.color = color;
 		this.positionStart = position;
 		this.positionEnd = position;
 		this.speed = speed;
+		this.weight = weight;
 		this.isBending = false;
 	}
 
@@ -69,6 +70,7 @@ class GlitchLine {
 
 	draw() {
 		stroke(this.color);
+		strokeWeight(this.weight);
 		line(0, this.positionStart, width, this.positionEnd);
 	}
 }
