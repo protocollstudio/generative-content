@@ -2,62 +2,83 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-07 16:02:36
+* @Last Modified time: 2019-08-09 10:55:41
 */
 
 let globalWidth = 800;
 let globalHeight = 800;
 
-let gAngle = 0;
-let scaleAmount = 1;
-let x = 200;
-let y = 200;
+let gAngle = 0; // to delete
+let x = 200; // to delete
+let y = 200; // to delete
 
 let panelSide;
 let tileSize = 30;
 
 let rectList = [];
+let scaleAmount = 0.5; // 0 -> 7
+let anglePerturbation = 20; // 0 -> 90
+
 
 function setup() {
-  createCanvas(globalWidth, globalHeight);
+  createCanvas(windowWidth, windowHeight);
+  //createCanvas(globalWidth, globalHeight);
+  //frameRate(30);
   angleMode(DEGREES);
   rectMode(CENTER);
   background(0);
 
   panelSide = width / tileSize;
-  //translate(tileSize/2, tileSize/2);
+  translate(tileSize/2, tileSize/2);
   createRectangles();
-  rectList.forEach((rectangle) => {
-    rectangle.draw();
-  });
 }
-
-function draw() {
-  gAngle += 2;
-  scaleAmount += 0.01;
-
-  push();
-  translate(x, y);
-  rotate(gAngle);
-  fill(255,0,0);
-  rect(0, 0, 200, 200);
-  pop();
-
-/*  stroke(255);
-  strokeWeight(4);
-  line(0,0, 100,100);*/
-}
-
 
 function createRectangles() {
   for(let i = 0; i < panelSide; i++) {
     for(let j = 0; j < panelSide; j++) {
-      let side = random(tileSize * 0.4, tileSize * 0.6);
-      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,12)));
+      let side = random(tileSize * 0.1, tileSize * 0.9);
+      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,anglePerturbation)));
     }
   }
 }
 
+function draw() {
+
+  drawRectangles();
+
+  push();
+  gAngle += 2;
+  translate(x, y);
+  rotate(gAngle);
+  fill(255,0,0);
+  rect(0, 0, 50, 50);
+  pop();
+
+
+}
+
+function drawRectangles() {
+
+  background(0);
+
+  /*rectList.forEach((rectangle) => {
+    rectangle.draw();
+  });
+*/
+  let waveNumber = random(10, 10);
+
+  for (let i = 0 ; i < waveNumber ; i++) {
+    let index = int(random(0, rectList.length));
+    rectList[index].draw();
+  }
+
+  console.log("mouseX = " + mouseX);
+  console.log("windowWidth = " + windowWidth);
+  console.log("mouseY = " + mouseY);
+  console.log("windowHeight = " + windowHeight);
+  console.log("----------------------------------");
+
+}
 
 class Rectangle {
 
@@ -66,42 +87,29 @@ class Rectangle {
     this.y = y;
     this.width = width;
     this.height = height;
-
     this.angle = angle;
-
-    this.rectangle = createGraphics(this.width, this.height);
-    this.rectangle.rectMode(CENTER);
-    this.rectangle.background(255);
-    this.rectangle.fill(255,255,255,100);
-    this.rectangle.noStroke();
-    this.rectangle.rect(0, 0, this.width/2, this.height/2);
-
-    this.rectangleBlur = createGraphics(this.width*2, this.height*2);
-    this.rectangleBlur.background(255);
-    this.rectangleBlur.fill(255,255,255,100);
-    this.rectangleBlur.noStroke();
-    this.rectangleBlur.rect(0, 0, this.width/2, this.height/2);
-    this.rectangleBlur.filter(BLUR,5);
   }
 
   draw() {
-    push()
+    push();
     translate(this.x, this.y);
     rotate(this.angle);
-    this.angle+=2;
-    //scale((mouseX / 100) - 1, (mouseY / 100) - 1);
-    noStroke();
-    //rect(-5, -5, this.width + 10, this.height + 10);
-    //rect(0, 0, this.width, this.height);
+    scale(((mouseX - windowWidth) / windowWidth) * scaleAmount, ((mouseY - windowHeight) / windowHeight) * scaleAmount);
+    strokeWeight(0);
 
-    image(this.rectangleBlur,0,0,0,0);
-    //image(this.rectangle,0,0,0,0);
-    this.modifyAngle();
+    let rectFill = random(0, 255);
+    /*fill(255,255,255,rectFill-100);
+    rect(-2, -2, this.width + 4, this.height + 4);*/
+
+    fill(255,255,255,rectFill);
+    rect(0, 0, this.width, this.height);
+
+//    this.modifyAngle();
     pop();
   }
 
   modifyAngle() {
-    this.rectangleBlur.rotate(this.angle + 1);
+    this.angle += 1;
     console.log();
   }
 
