@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-09 10:55:41
+* @Last Modified time: 2019-08-09 13:08:08
 */
 
 let globalWidth = 800;
@@ -16,9 +16,13 @@ let panelSide;
 let tileSize = 30;
 
 let rectList = [];
-let scaleAmount = 0.5; // 0 -> 7
-let anglePerturbation = 20; // 0 -> 90
+let scaleAmount = 4; // 0 -> 7
+let initAnglePerturbation = 0; // 0 -> 90
+let rotationSpeedMax = 0; // 1 -> 20
 
+let opacityChance = 0; // 0 -> 100
+let scaleChance = 1; // 0 -> 100
+let angleChance = 0; // 0 -> 100
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -29,23 +33,45 @@ function setup() {
   background(0);
 
   panelSide = width / tileSize;
-  translate(tileSize/2, tileSize/2);
-  createRectangles();
+  //translate(tileSize/2, tileSize/2);
+  createRectangleList();
+  drawRectangleList();
+  drawRandomRectangleInterval = setInterval(drawRandomRectangle, 0);
 }
 
-function createRectangles() {
+function createRectangleList() {
   for(let i = 0; i < panelSide; i++) {
     for(let j = 0; j < panelSide; j++) {
       let side = random(tileSize * 0.1, tileSize * 0.9);
-      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,anglePerturbation)));
+      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,initAnglePerturbation)));
     }
   }
 }
 
+function drawRectangleList() {
+  background(0);
+  rectList.forEach((rectangle) => {
+    editScale(rectangle);
+    editOpacity(rectangle);
+    editAngle(rectangle);
+    rectangle.draw();
+  });
+}
+
+function drawRandomRectangle() {
+  let index = int(random(0, rectList.length));
+  rectList[index].draw();
+}
+
 function draw() {
 
-  drawRectangles();
+  drawRectangleList();
 
+  updateScaleChance();
+  //updateOpacityChance();
+  //updateAngleChance();
+
+/*
   push();
   gAngle += 2;
   translate(x, y);
@@ -53,32 +79,41 @@ function draw() {
   fill(255,0,0);
   rect(0, 0, 50, 50);
   pop();
-
-
-}
-
-function drawRectangles() {
-
-  background(0);
-
-  /*rectList.forEach((rectangle) => {
-    rectangle.draw();
-  });
 */
-  let waveNumber = random(10, 10);
-
-  for (let i = 0 ; i < waveNumber ; i++) {
-    let index = int(random(0, rectList.length));
-    rectList[index].draw();
-  }
-
-  console.log("mouseX = " + mouseX);
-  console.log("windowWidth = " + windowWidth);
-  console.log("mouseY = " + mouseY);
-  console.log("windowHeight = " + windowHeight);
-  console.log("----------------------------------");
-
 }
+
+function editScale(rectangle) {
+  if (random(0,100) <= scaleChance) {
+    rectangle.scaleX = ((mouseX - windowWidth) / windowWidth) * scaleAmount + 0.4;
+    rectangle.scaleY = ((mouseX - windowWidth) / windowWidth) * scaleAmount + 0.4;
+  }
+}
+
+function editOpacity(rectangle) {
+  if (random(0,100) <= opacityChance) {
+    rectangle.opacity = random(0, 255);
+  }
+}
+
+function editAngle(rectangle) {
+  if (random(0,100) <= angleChance) {
+    rectangle.angle += rectangle.rotationSpeed;
+  }
+}
+
+
+function updateScaleChance() {
+  scaleChance = (mouseY / windowHeight) * 100;
+}
+
+function updateOpacityChance() {
+  opacityChance = (mouseY / windowHeight) * 100;
+}
+
+function updateAngleChance() {
+  angleChance = (mouseY / windowHeight) * 100;
+}
+
 
 class Rectangle {
 
@@ -88,29 +123,33 @@ class Rectangle {
     this.width = width;
     this.height = height;
     this.angle = angle;
+
+    this.scaleX = 1;
+    this.scaleY = 1;
+    this.opacity = random(0, 255);
+    this.rotationSpeed = random(-rotationSpeedMax,rotationSpeedMax);
   }
 
   draw() {
     push();
     translate(this.x, this.y);
+
+    //angle
     rotate(this.angle);
-    scale(((mouseX - windowWidth) / windowWidth) * scaleAmount, ((mouseY - windowHeight) / windowHeight) * scaleAmount);
+    //this.angle += 1;
+
+    //scale
+    scale(this.scaleX, this.scaleY);
+
+    //stroke
+    stroke(0);
     strokeWeight(0);
 
-    let rectFill = random(0, 255);
-    /*fill(255,255,255,rectFill-100);
-    rect(-2, -2, this.width + 4, this.height + 4);*/
-
-    fill(255,255,255,rectFill);
+    //draw rectangle
+    fill(255,255,255,this.opacity);
     rect(0, 0, this.width, this.height);
 
-//    this.modifyAngle();
     pop();
-  }
-
-  modifyAngle() {
-    this.angle += 1;
-    console.log();
   }
 
 }
