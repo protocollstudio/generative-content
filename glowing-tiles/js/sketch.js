@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-09 13:08:08
+* @Last Modified time: 2019-08-10 13:14:05
 */
 
 let globalWidth = 800;
@@ -13,16 +13,16 @@ let x = 200; // to delete
 let y = 200; // to delete
 
 let panelSide;
-let tileSize = 30;
+let tileSize = 50;
 
 let rectList = [];
-let scaleAmount = 4; // 0 -> 7
-let initAnglePerturbation = 0; // 0 -> 90
-let rotationSpeedMax = 0; // 1 -> 20
+let scaleAmount = 7; // 0 -> 7
+let initAnglePerturbation = 10; // 0 -> 90
+let rotationSpeedMax = 10; // 1 -> 20
 
-let opacityChance = 0; // 0 -> 100
+let opacityChance = 10; // 0 -> 100
 let scaleChance = 1; // 0 -> 100
-let angleChance = 0; // 0 -> 100
+let angleChance = 100; // 0 -> 100
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -84,8 +84,8 @@ function draw() {
 
 function editScale(rectangle) {
   if (random(0,100) <= scaleChance) {
-    rectangle.scaleX = ((mouseX - windowWidth) / windowWidth) * scaleAmount + 0.4;
-    rectangle.scaleY = ((mouseX - windowWidth) / windowWidth) * scaleAmount + 0.4;
+    rectangle.scaleX = ((mouseX - windowWidth) / windowWidth) * scaleAmount;
+    rectangle.scaleY = ((mouseX - windowWidth) / windowWidth) * scaleAmount;
   }
 }
 
