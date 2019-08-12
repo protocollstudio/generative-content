@@ -1,0 +1,13 @@
+{
+  "name": "glowing-tiles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sketch.js",
+  "scripts": {
+    "start": "browser-sync start --server -f -w"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
