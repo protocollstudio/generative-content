@@ -2,14 +2,14 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:37:26
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-16 18:44:04
+* @Last Modified time: 2019-08-16 19:18:55
 */
 
 class LineManager {
 
 	constructor() {
 		this.lineList = [];
-		this.lineNumberMax 	      = 100;
+		this.lineNumberMax 	      = 200;
 
 		// 0 -> 100
 		this.jumpProbability      = 0;
@@ -34,14 +34,19 @@ class LineManager {
 
 	// methods
 
-	generateLineList() {
-		for(let i = 0; i < random(this.lineNumberMax,this.lineNumberMax); i++) {
-			let lineColor = color(random(50, 255));
-			let linePosition = random(0, height);
-			let lineSpeed = random(1, 15);
-			let lineWeight = random(2, 5);
-			this.lineList.push(new GlitchLine(lineColor, linePosition, lineSpeed, lineWeight));
+	generateLineList(max = this.lineNumberMax) {
+		for(let i = 0; i < random(0,max); i++) {
+			this.generateLine();
 		}
+	}
+
+	generateLine() {
+		let lineColor = color(random(50, 255));
+		let linePosition = random(0, height);
+		let lineSpeed = random(1, 15);
+		let lineWeight = random(2, 5);
+
+		this.lineList.push(new GlitchLine(lineColor, linePosition, lineSpeed, lineWeight));
 	}
 
 	draw() {
@@ -68,34 +73,38 @@ class LineManager {
 		});
 	}
 
-	mouseMoved(mouseX, mouseY) {
+	mouseMoved() {
 		this.bendProbability = int(map(mouseX, 0, windowWidth, 0, 100));
 		this.bendDuration = int(map(mouseY, 0, windowHeight, 0, 100));
-		console.log(`bendProbability =  ${this.bendProbability}, bendDuration =  ${this.bendDuration}`);
+		this.updateLineNumber();
+	}
+
+	updateLineNumber() {
+		let lineCount = int(map(mouseX, 0, windowWidth, 0, this.lineNumberMax));
+		if (lineCount < this.lineList.length) {
+			this.lineList = this.lineList.slice(0,lineCount);
+		}
+		else {
+			this.generateLineList(lineCount - this.lineList.length);
+		}
+
 	}
 
 	keyPressed() {
 	  if (keyCode === ENTER) {
-	    this.promptParameters();
+	    //this.promptParameters();
 	  }
-	}
-
-	promptParameters() {
-		console.log("----------------------------------");
-		console.log(`lineNumberMax = ${this.lineNumberMax}`);
-		console.log(`jumpDistance = ${this.jumpDistance}`);
-		console.log(`jumpDistanceRoom = ${this.jumpDistanceRoom}`);
-		console.log(`bendProbability = ${this.bendProbability}`);
-		console.log(`bendDuration = ${this.bendDuration}`);
-		console.log(`bendAmplitude = ${this.bendAmplitude}`);
-		console.log(`bendAmplitudeRoom = ${this.bendAmplitudeRoom}`);
-		console.log(`aberationProbability = ${this.aberationProbability}`);
 	}
 
 	reset() {
 		this.lineList = [];
 	}
 
+	getLineCount() {
+		return this.lineList.length;
+	}
+
+/*
 	setJumpProbability(jumpProbability) {
 		this.jumpProbability = jumpProbability;
 	}
@@ -113,7 +122,7 @@ class LineManager {
 	}
 	setBendAmplitude(bendAmplitude) {
 		this.bendAmplitude = bendAmplitude;
-	}
+	}*/
 
 }
 
