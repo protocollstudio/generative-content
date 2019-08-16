@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:17:16
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-07 12:01:54
+* @Last Modified time: 2019-08-16 13:28:58
 */
 
 class GlitchLine {
@@ -14,6 +14,7 @@ class GlitchLine {
 		this.speed = speed;
 		this.weight = weight;
 		this.isBending = false;
+		this.aberationLineOffset = 10;
 	}
 
 	move(speed) {
@@ -30,7 +31,7 @@ class GlitchLine {
 	  }
 	}
 
-	glitchMove(distance) {
+	jump(distance) {
 		this.move(distance);
 	}
 
@@ -72,5 +73,19 @@ class GlitchLine {
 		stroke(this.color);
 		strokeWeight(this.weight);
 		line(0, this.positionStart, width, this.positionEnd);
+	}
+	drawAberation() {
+
+		if (random(100) < 50){
+			stroke(255,0,0);
+		} else {
+			stroke(0,0,255);
+		}
+
+		/*strokeWeight(this.weight);
+		line(0, this.positionStart - random(0,this.aberationLineOffset), width, this.positionEnd + random(0,this.aberationLineOffset));*/
+
+		strokeWeight(this.weight);
+		line(0, this.positionStart + random(0,this.aberationLineOffset), width, this.positionEnd + random(0,this.aberationLineOffset));
 	}
 }

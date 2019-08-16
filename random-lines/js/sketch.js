@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-09 10:06:54
+* @Last Modified time: 2019-08-16 18:41:00
 */
 
 var delay = 0;
@@ -13,7 +13,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   lineManager = new LineManager(width, height);
-  lineManager.addLine();
+  lineManager.generateLineList();
 }
 
 function draw() {
@@ -21,10 +21,10 @@ function draw() {
   lineManager.draw();
 }
 
-function mouseClicked(event) {
+/*function mouseClicked(event) {
   event.preventDefault();
   lineManager.addLine();
-}
+}*/
 
 /*function mouseClicked(event) {
   event.preventDefault();
@@ -33,4 +33,12 @@ function mouseClicked(event) {
 
 function mouseWheel() {
   lineManager.reset();
+}
+
+function mouseMoved() {
+  lineManager.mouseMoved(mouseX, mouseY);
+}
+
+function keyPressed() {
+  lineManager.keyPressed();
 }
