@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-21 11:34:03
+* @Last Modified time: 2019-08-21 13:05:52
 */
 
 var delay = 0;
@@ -54,4 +54,8 @@ function getParameters() {
     ["aberationProbability", this.lineManager.aberationProbability],
     ["bendDuration", this.lineManager.bendDuration]
   ];
+}
+
+function updateMidi(note, velocity) {
+  console.log("note: " + note + ", velocity: " + velocity);
 }
