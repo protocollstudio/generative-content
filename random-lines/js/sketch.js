@@ -2,11 +2,12 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-16 20:13:38
+* @Last Modified time: 2019-08-21 11:34:03
 */
 
 var delay = 0;
 var lineManager;
+var parametersPanelManager;
 var areParametersVisible = true;
 
 function setup() {
@@ -14,14 +15,15 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   lineManager = new LineManager(width, height);
+  parametersPanelManager = new ParametersPanelManager();
   lineManager.generateLineList();
 }
 
 function draw() {
   background(0);
   lineManager.draw();
-  if (areParametersVisible) {
-    showParameters();
+  if (parametersPanelManager.isVisible) {
+    parametersPanelManager.print(getParameters());
   }
 }
 
@@ -36,39 +38,20 @@ function mouseMoved() {
 function keyPressed() {
   lineManager.keyPressed();
   if (keyCode == ENTER) {
-    areParametersVisible = !areParametersVisible;
+    parametersPanelManager.changeVisibility();
   }
 }
 
-function showParameters() {
-    let titleSize = 100;
-    let parameterOffset = 45;
-    let xOffset = 20;
-
-    fill(0, 0, 0, 150);
-    strokeWeight(0);
-    rect(0, 0, 600, 600);
-
-    fill(0, 200, 153);
-
-    textSize(titleSize);
-    text("Parameters", xOffset, 100);
-
-    textSize(30);
-    var valeurList = [
-      ["lineNumberMax", lineManager.lineNumberMax],
-      ["jumpDistance", lineManager.jumpDistance],
-      ["jumpDistanceRoom", lineManager.jumpDistanceRoom],
-      ["bendProbability", lineManager.bendProbability],
-      ["bendDuration", lineManager.bendDuration],
-      ["bendAmplitude", lineManager.bendAmplitude],
-      ["bendAmplitudeRoom", lineManager.bendAmplitudeRoom],
-      ["aberationProbability", lineManager.aberationProbability],
-      ["bendDuration", lineManager.bendDuration]
-    ];
-
-    valeurList.forEach((valeur, index) => {
-      text(valeur[0] + " = " + valeur[1], xOffset + 20, titleSize + 20 + parameterOffset * (index + 1));
-    });
-
-  }
+function getParameters() {
+  return [
+    ["lineNumberMax", this.lineManager.lineNumberMax],
+    ["jumpDistance", this.lineManager.jumpDistance],
+    ["jumpDistanceRoom", this.lineManager.jumpDistanceRoom],
+    ["bendProbability", this.lineManager.bendProbability],
+    ["bendDuration", this.lineManager.bendDuration],
+    ["bendAmplitude", this.lineManager.bendAmplitude],
+    ["bendAmplitudeRoom", this.lineManager.bendAmplitudeRoom],
+    ["aberationProbability", this.lineManager.aberationProbability],
+    ["bendDuration", this.lineManager.bendDuration]
+  ];
+}
