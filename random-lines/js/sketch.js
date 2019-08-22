@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-21 13:05:52
+* @Last Modified time: 2019-08-22 12:46:32
 */
 
 var delay = 0;
@@ -56,6 +56,19 @@ function getParameters() {
   ];
 }
 
-function updateMidi(note, velocity) {
-  console.log("note: " + note + ", velocity: " + velocity);
-}
+
+midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_01, function(e) {
+  console.log(e);
+
+  this._content = e.detail.note;
+  this._color = e.detail.velocity;
+
+  console.log("content = " + this._content);
+  console.log("color = " + this._color);
+
+  // fait le job
+  /*const paragraph = document.getElementById("para1");
+  paragraph.innerHTML = this._content;
+  paragraph.style.color = this._color;*/
+});
+
