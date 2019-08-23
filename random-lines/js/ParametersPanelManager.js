@@ -2,11 +2,11 @@
 * @Author: OMAO
 * @Date:   2019-08-21 11:12:07
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-21 11:35:34
+* @Last Modified time: 2019-08-23 14:56:52
 */
 
 class ParametersPanelManager {
-	constructor() {
+	constructor(isVisible = false) {
 		// DI
 		//
 
@@ -20,7 +20,7 @@ class ParametersPanelManager {
 	    this.panelBgColor = color(0, 0, 0, 150);
 	    this.panelTextColor = color(0, 200, 153);
 
-	    this.isVisible = true;
+	    this.isVisible = isVisible;
 
 	}
 

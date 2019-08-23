@@ -2,21 +2,21 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-23 14:51:01
+* @Last Modified time: 2019-08-23 15:11:17
 */
 
 var delay = 0;
 var lineManager;
 var parametersPanelManager;
-var areParametersVisible = true;
 
 function setup() {
   //createCanvas(1920, 1080);
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   lineManager = new LineManager(width, height);
-  parametersPanelManager = new ParametersPanelManager();
+  parametersPanelManager = new ParametersPanelManager(false);
   lineManager.generateLineList();
+  refreshAll();
 }
 
 function draw() {
@@ -60,11 +60,23 @@ function getParameters() {
 }
 
 
+function refreshAll() {
+/*  refreshLineNumber();
+  refreshBendProbability();
+  refreshBendDuration();
+  refreshBendAmplitude();
+  refreshBendAmplitudeRoom();
+  refreshJumpProbability();
+  refreshJumpDistance();
+  refreshJumpDistanceRoom();*/
+}
+
+
+// ---- MASTER
+// ----------------
+
 midiMixManager.addEventListener(EVENT.MASTER_SLIDER, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = 100;
-  this.lineManager.updateLineNumber(e.detail.velocity, 127);
-  // bendProbability = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshLineNumber(e.detail.velocity);
 });
 
 
@@ -72,42 +84,83 @@ midiMixManager.addEventListener(EVENT.MASTER_SLIDER, (e) => {
 // ----------------
 
 midiMixManager.addEventListener(EVENT.TRACK_01_SLIDER, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = 100;
-  this.lineManager.bendProbability = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshBendProbability(e.detail.velocity);
 });
 midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_01, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = 100;
-  this.lineManager.bendDuration = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshBendDuration(e.detail.velocity);
 });
 midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_02, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = 150;
-  this.lineManager.bendAmplitude = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
-  this.lineManager.bendAmplitudeRoom = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshBendAmplitude(e.detail.velocity);
 });
 midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_03, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = this.lineManager.bendAmplitude;
-  this.lineManager.bendAmplitudeRoom = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshBendAmplitudeRoom(e.detail.velocity);
 });
+
 
 // ---- JUMP
 // ----------------
 
 midiMixManager.addEventListener(EVENT.TRACK_02_SLIDER, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = 100;
-  this.lineManager.jumpProbability = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshJumpProbability(e.detail.velocity);
 });
 midiMixManager.addEventListener(EVENT.TRACK_02_KNOB_01, (e) => {
-  let parameterValueMin = 0;
-  let parameterValueMax = 100;
-  this.lineManager.jumpDistance = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  refreshJumpDistance(e.detail.velocity);
 });
 midiMixManager.addEventListener(EVENT.TRACK_02_KNOB_02, (e) => {
+  refreshJumpDistanceRoom(e.detail.velocity);
+});
+
+
+
+// ---- MASTER
+// ----------------
+
+function refreshLineNumber(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.updateLineNumber(velocity, 127);
+}
+
+// ---- BEND
+// ----------------
+
+function refreshBendProbability(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.bendProbability = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
+function refreshBendDuration(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.bendDuration = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
+function refreshBendAmplitude(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = 150;
+  this.lineManager.bendAmplitude = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
+function refreshBendAmplitudeRoom(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = this.lineManager.bendAmplitude;
+  this.lineManager.bendAmplitudeRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
+
+
+// ---- JUMP
+// ----------------
+
+function refreshJumpProbability(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.jumpProbability = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
+function refreshJumpDistance(velocity) {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.jumpDistance = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
+function refreshJumpDistanceRoom(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = this.lineManager.jumpDistance;
-  this.lineManager.jumpDistanceRoom = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
-});
+  this.lineManager.jumpDistanceRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+}
