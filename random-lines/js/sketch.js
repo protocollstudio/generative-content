@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-22 12:46:32
+* @Last Modified time: 2019-08-23 14:51:01
 */
 
 var delay = 0;
@@ -32,7 +32,7 @@ function mouseWheel() {
 }
 
 function mouseMoved() {
-  lineManager.mouseMoved(mouseX, mouseY);
+  //lineManager.mouseMoved(mouseX, mouseY);
 }
 
 function keyPressed() {
@@ -44,31 +44,70 @@ function keyPressed() {
 
 function getParameters() {
   return [
-    ["lineNumberMax", this.lineManager.lineNumberMax],
+    ["jumpProbability", this.lineManager.jumpProbability],
     ["jumpDistance", this.lineManager.jumpDistance],
     ["jumpDistanceRoom", this.lineManager.jumpDistanceRoom],
+
     ["bendProbability", this.lineManager.bendProbability],
     ["bendDuration", this.lineManager.bendDuration],
     ["bendAmplitude", this.lineManager.bendAmplitude],
     ["bendAmplitudeRoom", this.lineManager.bendAmplitudeRoom],
-    ["aberationProbability", this.lineManager.aberationProbability],
-    ["bendDuration", this.lineManager.bendDuration]
+
+    ["lineNumberMax", this.lineManager.lineNumberMax],
+    ["line number", this.lineManager.lineList.length],
+    ["aberationProbability", this.lineManager.aberationProbability]
   ];
 }
 
 
-midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_01, function(e) {
-  console.log(e);
-
-  this._content = e.detail.note;
-  this._color = e.detail.velocity;
-
-  console.log("content = " + this._content);
-  console.log("color = " + this._color);
-
-  // fait le job
-  /*const paragraph = document.getElementById("para1");
-  paragraph.innerHTML = this._content;
-  paragraph.style.color = this._color;*/
+midiMixManager.addEventListener(EVENT.MASTER_SLIDER, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.updateLineNumber(e.detail.velocity, 127);
+  // bendProbability = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
 });
 
+
+// ---- BEND
+// ----------------
+
+midiMixManager.addEventListener(EVENT.TRACK_01_SLIDER, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.bendProbability = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});
+midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_01, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.bendDuration = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});
+midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_02, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = 150;
+  this.lineManager.bendAmplitude = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+  this.lineManager.bendAmplitudeRoom = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});
+midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_03, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = this.lineManager.bendAmplitude;
+  this.lineManager.bendAmplitudeRoom = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});
+
+// ---- JUMP
+// ----------------
+
+midiMixManager.addEventListener(EVENT.TRACK_02_SLIDER, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.jumpProbability = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});
+midiMixManager.addEventListener(EVENT.TRACK_02_KNOB_01, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = 100;
+  this.lineManager.jumpDistance = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});
+midiMixManager.addEventListener(EVENT.TRACK_02_KNOB_02, (e) => {
+  let parameterValueMin = 0;
+  let parameterValueMax = this.lineManager.jumpDistance;
+  this.lineManager.jumpDistanceRoom = int(map(e.detail.velocity, 0, 127, parameterValueMin, parameterValueMax));
+});

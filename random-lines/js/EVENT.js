@@ -2,10 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:39
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-22 12:43:51
+* @Last Modified time: 2019-08-23 14:31:55
 */
 
 const EVENT = {
+    ALL: "event-all",
+    MASTER_SLIDER : "event-master-slider",
 
     TRACK_01_KNOB_01: "event-track-01-knob-01",
     TRACK_01_KNOB_02: "event-track-01-knob-02",

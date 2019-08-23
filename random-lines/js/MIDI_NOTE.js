@@ -2,10 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:23
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-22 12:43:30
+* @Last Modified time: 2019-08-23 14:37:21
 */
 
 const MIDI_NOTE = {
+    MASTER_SLIDER: 62,
+
     TRACK_01_KNOB_01: 16,
     TRACK_01_KNOB_02: 17,
     TRACK_01_KNOB_03: 18,

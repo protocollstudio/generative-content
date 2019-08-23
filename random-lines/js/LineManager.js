@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:37:26
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-16 19:18:55
+* @Last Modified time: 2019-08-23 14:38:46
 */
 
 class LineManager {
@@ -76,11 +76,11 @@ class LineManager {
 	mouseMoved() {
 		this.bendProbability = int(map(mouseX, 0, windowWidth, 0, 100));
 		this.bendDuration = int(map(mouseY, 0, windowHeight, 0, 100));
-		this.updateLineNumber();
+		this.updateLineNumber(mouseX, windowWidth);
 	}
 
-	updateLineNumber() {
-		let lineCount = int(map(mouseX, 0, windowWidth, 0, this.lineNumberMax));
+	updateLineNumber(currentValue, maxValue) {
+		let lineCount = int(map(currentValue, 0, maxValue, 0, this.lineNumberMax));
 		if (lineCount < this.lineList.length) {
 			this.lineList = this.lineList.slice(0,lineCount);
 		}
@@ -103,26 +103,6 @@ class LineManager {
 	getLineCount() {
 		return this.lineList.length;
 	}
-
-/*
-	setJumpProbability(jumpProbability) {
-		this.jumpProbability = jumpProbability;
-	}
-	setJumpDistance(jumpDistance) {
-		this.jumpDistance = jumpDistance;
-	}
-	setJumpDistanceRoom(jumpDistanceRoom) {
-		this.jumpDistanceRoom = jumpDistanceRoom;
-	}
-	setBendProbability(bendProbability) {
-		this.bendProbability = bendProbability;
-	}
-	setBendDuration(bendDuration) {
-		this.bendDuration = bendDuration;
-	}
-	setBendAmplitude(bendAmplitude) {
-		this.bendAmplitude = bendAmplitude;
-	}*/
 
 }
 
