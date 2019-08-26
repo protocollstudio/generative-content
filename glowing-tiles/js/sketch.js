@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-10 13:14:05
+* @Last Modified time: 2019-08-26 22:33:21
 */
 
 let globalWidth = 800;
@@ -13,19 +13,31 @@ let x = 200; // to delete
 let y = 200; // to delete
 
 let panelSide;
-let tileSize = 50;
+let tileSize = 25;
 
 let rectList = [];
-let scaleAmount = 7; // 0 -> 7
+let scaleAmountMax = 7; // 0 -> 7
+let rectScaleInitMin = 1; // 0 -> 7
+let rectScaleInitMax = 1; // 0 -> 7
 let initAnglePerturbation = 10; // 0 -> 90
 let rotationSpeedMax = 10; // 1 -> 20
 
-let opacityChance = 10; // 0 -> 100
+let opacityChance = 40; // 0 -> 100
 let scaleChance = 1; // 0 -> 100
-let angleChance = 100; // 0 -> 100
+let angleChance = 0; // 0 -> 100
+
+let spectrum;
+let fft;
+let sound;
+let soundAvg = 0;
+
+function preload(){
+  sound = loadSound('assets/lille.mp3');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   //createCanvas(globalWidth, globalHeight);
   //frameRate(30);
   angleMode(DEGREES);
@@ -37,35 +49,26 @@ function setup() {
   createRectangleList();
   drawRectangleList();
   drawRandomRectangleInterval = setInterval(drawRandomRectangle, 0);
-}
 
-function createRectangleList() {
-  for(let i = 0; i < panelSide; i++) {
-    for(let j = 0; j < panelSide; j++) {
-      let side = random(tileSize * 0.1, tileSize * 0.9);
-      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,initAnglePerturbation)));
-    }
-  }
-}
+  fft = new p5.FFT();
 
-function drawRectangleList() {
-  background(0);
-  rectList.forEach((rectangle) => {
-    editScale(rectangle);
-    editOpacity(rectangle);
-    editAngle(rectangle);
-    rectangle.draw();
-  });
-}
-
-function drawRandomRectangle() {
-  let index = int(random(0, rectList.length));
-  rectList[index].draw();
+  sound.amp(1);
+  //sound.isPlaying();
+  sound.play();
+  sound.jump(100, 30);
 }
 
 function draw() {
+/*  console.log("displayHeight = "+displayHeight);
+  console.log("displayWidth = "+displayWidth);
+  console.log("height = "+height);
+  console.log("width = "+width);
+  console.log("windowWidth = "+windowWidth);
+  console.log("windowHeight = "+windowHeight);*/
+  spectrum = fft.analyze();
 
   drawRectangleList();
+  drawSpectrum();
 
   updateScaleChance();
   //updateOpacityChance();
@@ -82,10 +85,65 @@ function draw() {
 */
 }
 
+function drawSpectrum() {
+  if (spectrum !== undefined) {
+    let spectrumSize = 200;
+    //let spectrumSize = spectrum.length;
+    let initSize = 500;
+    let total = 0;
+
+    for (var i = initSize; i < initSize + spectrumSize; i++){
+      total += spectrum[i];
+      /*fill(255,0,0);
+      var x = map(i, 0, spectrum.length, 0, width);
+      var h = -height + map(spectrum[i], 0, 255, height, 0);
+      rect(x, height, width / spectrum.length, h);*/
+    }
+    let newAvg = int(total / (spectrumSize));
+    let spaceBetweenAvgMax = 5;
+    soundAvg = abs(newAvg - soundAvg) > spaceBetweenAvgMax ? newAvg : soundAvg;
+    /*textSize(50);
+    fill(89, 255, 200);
+    text(soundAvg, 10, 100);
+    if (soundAvg * 4 > 255) {
+      text(">255", 10, 160);
+    }*/
+  }
+}
+function createRectangleList() {
+  for(let i = 0; i < panelSide; i++) {
+    for(let j = 0; j < panelSide; j++) {
+      let side = random(tileSize * rectScaleInitMin, tileSize * rectScaleInitMax);
+      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,initAnglePerturbation)));
+      //console.log("["+ rectList.length - 1 +"] = " + rectList[rectList.length - 1].hypotenuse);
+    }
+  }
+}
+
+function drawRectangleList() {
+  background(0);
+
+  rectList.forEach((rectangle, index) => {
+    editScale(rectangle);
+    editOpacity(rectangle);
+    editAngle(rectangle);
+    rectangle.draw();
+  });
+
+}
+
+function drawRandomRectangle() {
+  let index = int(random(0, rectList.length));
+  rectList[index].draw();
+}
+
 function editScale(rectangle) {
   if (random(0,100) <= scaleChance) {
-    rectangle.scaleX = ((mouseX - windowWidth) / windowWidth) * scaleAmount;
-    rectangle.scaleY = ((mouseX - windowWidth) / windowWidth) * scaleAmount;
+//    let scaleAmount = map(windowWidth-mouseX, 0, windowWidth, 0, scaleAmount);
+    let scaleAmount = map(soundAvg, 0, 255, 0, scaleAmountMax);
+    scaleAmountMax = map(mouseX, 0, width, 0, 7);
+    rectangle.scaleX = scaleAmount;
+    rectangle.scaleY = scaleAmount;
   }
 }
 
@@ -115,41 +173,3 @@ function updateAngleChance() {
 }
 
 
-class Rectangle {
-
-  constructor(x, y, width, height, angle) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.angle = angle;
-
-    this.scaleX = 1;
-    this.scaleY = 1;
-    this.opacity = random(0, 255);
-    this.rotationSpeed = random(-rotationSpeedMax,rotationSpeedMax);
-  }
-
-  draw() {
-    push();
-    translate(this.x, this.y);
-
-    //angle
-    rotate(this.angle);
-    //this.angle += 1;
-
-    //scale
-    scale(this.scaleX, this.scaleY);
-
-    //stroke
-    stroke(0);
-    strokeWeight(0);
-
-    //draw rectangle
-    fill(255,255,255,this.opacity);
-    rect(0, 0, this.width, this.height);
-
-    pop();
-  }
-
-}
