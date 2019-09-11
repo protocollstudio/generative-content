@@ -2,21 +2,13 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:26:27
+* @Last Modified time: 2019-09-11 11:58:40
 */
 
-let gAngle = 0; // to delete
-let x = 200; // to delete
-let y = 200; // to delete
-
-let panelSide;
-let tileSize = 150;
-
-let rectList = [];
 
 // -----------------------------
 
-let scaleChance = 0; // 0 -> 100
+/*let scaleChance = 0; // 0 -> 100
 let scaleAmountMax = 1; // 0 -> 7
 let scaleAmountMin = 0.5; // 0 -> 7
 let rectScaleInitMin = 1; // 0 -> 7
@@ -26,15 +18,21 @@ let opacityChance = 0; // 0 -> 100
 
 let angleChance = 0; // 0 -> 100
 let initAnglePerturbation = 0; // 0 -> 90
-let rotationSpeedMax = 0; // 1 -> 20
+let rotationSpeedMax = 0; // 1 -> 20*/
 
-// -----------------------------
+// global print
+let panelSide;
+let tileSize = 150;
 
+// sound management
 let spectrum;
 let fft;
 let sound;
 let soundAvg = 0;
-var parametersPanelManager;
+
+// managers
+let parametersPanelManager;
+let rectangleManager;
 
 function preload(){
   sound = loadSound('assets/lille.mp3');
@@ -49,9 +47,10 @@ function setup() {
   frameRate(5);
 
   panelSide = width / tileSize;
-  createRectangleList();
-  drawRectangleList();
   parametersPanelManager = new ParametersPanelManager(false);
+  rectangleManager = new RectangleManager();
+  rectangleManager.createRectangleList();
+  rectangleManager.drawRectangleList();
 
   fft = new p5.FFT();
 
@@ -64,7 +63,7 @@ function draw() {
   background(0);
   spectrum = fft.analyze();
 
-  drawRectangleList();
+  rectangleManager.drawRectangleList();
   //processSound();
 
   //updateScaleChance();
@@ -99,52 +98,7 @@ function processSound() {
     }*/
   }
 }
-function createRectangleList() {
-  for(let i = 0; i < panelSide; i++) {
-    for(let j = 0; j < panelSide; j++) {
-      let side = random(tileSize * rectScaleInitMin, tileSize * rectScaleInitMax);
-      rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,initAnglePerturbation)));
-      //console.log("["+ rectList.length - 1 +"] = " + rectList[rectList.length - 1].hypotenuse);
-    }
-  }
-}
-function drawRectangleList() {
-  background(0);
 
-  rectList.forEach((rectangle, index) => {
-    editScale(rectangle);
-    editOpacity(rectangle);
-    editAngle(rectangle);
-    rectangle.draw();
-  });
-}
-
-
-function editScale(rectangle) {
-  if (random(0,100) <= scaleChance) {
-    let scaleAmount = random(scaleAmountMin, scaleAmountMax);
-    //let scaleAmount = map(soundAvg, 0, 255, 0, scaleAmountMax);
-    //scaleAmountMax = map(mouseX, 0, width, 0, 7);
-    rectangle.scaleX = scaleAmount;
-    rectangle.scaleY = scaleAmount;
-  }
-}
-
-function editOpacity(rectangle) {
-  if (random(0,100) <= opacityChance) {
-    rectangle.opacity = random(0, 255);
-  }
-}
-
-function editAngle(rectangle) {
-  if (random(0,100) <= angleChance) {
-    rectangle.angle += rectangle.rotationSpeed;
-  }
-}
-
-function updateScaleChance() { scaleChance = (mouseY / windowHeight) * 100; }
-function updateOpacityChance() { opacityChance = (mouseY / windowHeight) * 100; }
-function updateAngleChance() { angleChance = (mouseY / windowHeight) * 100; }
 
 
 // PANEL
@@ -156,17 +110,17 @@ function keyPressed() {
 }
 function getParameters() {
   return [
-    ["[1.S] scaleChance", scaleChance],
-    ["[1.1] scaleAmountMin", scaleAmountMin],
-    ["[1.2] scaleAmountMax", scaleAmountMax],
-    ["rectScaleInitMin", rectScaleInitMin],
-    ["rectScaleInitMax", rectScaleInitMax],
+    ["[1.S] scaleChance", rectangleManager.scaleChance],
+    ["[1.1] scaleAmountMin", rectangleManager.scaleAmountMin],
+    ["[1.2] scaleAmountMax", rectangleManager.scaleAmountMax],
+    ["rectScaleInitMin", rectangleManager.rectScaleInitMin],
+    ["rectScaleInitMax", rectangleManager.rectScaleInitMax],
 
-    ["[2.S] opacityChance", opacityChance],
+    ["[2.S] opacityChance", rectangleManager.opacityChance],
 
-    ["[3.S] angleChance", angleChance],
-    ["[3.1] rotationSpeedMax", rotationSpeedMax],
-    ["initAnglePerturbation", initAnglePerturbation],
+    ["[3.S] angleChance", rectangleManager.angleChance],
+    ["[3.1] rotationSpeedMax", rectangleManager.rotationSpeedMax],
+    ["initAnglePerturbation", rectangleManager.initAnglePerturbation],
 
     ["[M.S] tileSize", tileSize]
   ];
@@ -184,20 +138,20 @@ function getParameters() {
 */
 
 midiMixManager.addEventListener(EVENT.TRACK_01_SLIDER, (e) => { refreshScaleChance(e.detail.velocity); });
-function refreshScaleChance(velocity) { scaleChance = mapVelocityToParameter(velocity); }
+function refreshScaleChance(velocity) { rectangleManager.scaleChance = mapVelocityToParameter(velocity); }
 
 midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_01, (e) => { refreshScaleAmountMin(e.detail.velocity); });
-function refreshScaleAmountMin(velocity) { scaleAmountMin = mapVelocityToParameter(velocity, 0.1, 7, false); }
+function refreshScaleAmountMin(velocity) { rectangleManager.scaleAmountMin = mapVelocityToParameter(velocity, 0.1, 7, false); }
 
 midiMixManager.addEventListener(EVENT.TRACK_01_KNOB_02, (e) => { refreshScaleAmountMax(e.detail.velocity); });
-function refreshScaleAmountMax(velocity) { scaleAmountMax = mapVelocityToParameter(velocity, 0.1, 7, false); }
+function refreshScaleAmountMax(velocity) { rectangleManager.scaleAmountMax = mapVelocityToParameter(velocity, 0.1, 7, false); }
 
 /*
   opacityChance: 0 -> 100
 */
 
 midiMixManager.addEventListener(EVENT.TRACK_02_SLIDER, (e) => { refreshOpacityChance(e.detail.velocity); });
-function refreshOpacityChance(velocity) { opacityChance = mapVelocityToParameter(velocity); }
+function refreshOpacityChance(velocity) { rectangleManager.opacityChance = mapVelocityToParameter(velocity); }
 
 
 /*
@@ -207,13 +161,13 @@ function refreshOpacityChance(velocity) { opacityChance = mapVelocityToParameter
 */
 
 midiMixManager.addEventListener(EVENT.TRACK_03_SLIDER, (e) => { refreshAngleChance(e.detail.velocity); });
-function refreshAngleChance(velocity) { angleChance = mapVelocityToParameter(velocity); }
+function refreshAngleChance(velocity) { rectangleManager.angleChance = mapVelocityToParameter(velocity); }
 
 midiMixManager.addEventListener(EVENT.TRACK_03_KNOB_01, (e) => { refreshRotationSpeedMax(e.detail.velocity); });
-function refreshRotationSpeedMax(velocity) { rotationSpeedMax = mapVelocityToParameter(velocity, 1, 50); }
+function refreshRotationSpeedMax(velocity) { rectangleManager.rotationSpeedMax = mapVelocityToParameter(velocity, 1, 50); }
 
 /*midiMixManager.addEventListener(EVENT.TRACK_03_KNOB_02, (e) => { refreshInitAnglePerturbation(e.detail.velocity); });
-function refreshInitAnglePerturbation(velocity) { initAnglePerturbation = mapVelocityToParameter(velocity, 0, 90); }*/
+function refreshInitAnglePerturbation(velocity) { rectangleManager.initAnglePerturbation = mapVelocityToParameter(velocity, 0, 90); }*/
 
 midiMixManager.addEventListener(EVENT.MASTER_SLIDER, (e) => { refreshTileSize(e.detail.velocity); });
-function refreshTileSize(velocity) { tileSize = mapVelocityToParameter(velocity, 50, 200); }
+function refreshTileSize(velocity) { rectangleManager.tileSize = mapVelocityToParameter(velocity, 50, 200); }

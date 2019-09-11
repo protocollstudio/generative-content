@@ -2,12 +2,14 @@
 * @Author: OMAO
 * @Date:   2019-08-23 15:52:46
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 10:24:33
+* @Last Modified time: 2019-09-11 12:02:12
 */
+
+// need p5
 
 class Rectangle {
 
-  constructor(x, y, rectangleWidth, rectangleHeight, angle) {
+  constructor(x, y, rectangleWidth, rectangleHeight, angle, rotationSpeedMax) {
     this.x = x;
     this.y = y;
     this.width = rectangleWidth;
@@ -18,10 +20,10 @@ class Rectangle {
     this.scaleX = 1;
     this.scaleY = 1;
     this.opacity = random(0, 255);
-    this.updateRotationSpeed();
+    this.updateRotationSpeed(rotationSpeedMax);
   }
 
-  updateRotationSpeed() {
+  updateRotationSpeed(rotationSpeedMax) {
     this.rotationSpeed = random(-rotationSpeedMax,rotationSpeedMax);
   }
 
