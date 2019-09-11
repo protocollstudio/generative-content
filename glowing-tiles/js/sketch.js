@@ -2,27 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:58:40
+* @Last Modified time: 2019-09-11 14:37:51
 */
-
-
-// -----------------------------
-
-/*let scaleChance = 0; // 0 -> 100
-let scaleAmountMax = 1; // 0 -> 7
-let scaleAmountMin = 0.5; // 0 -> 7
-let rectScaleInitMin = 1; // 0 -> 7
-let rectScaleInitMax = 1; // 0 -> 7
-
-let opacityChance = 0; // 0 -> 100
-
-let angleChance = 0; // 0 -> 100
-let initAnglePerturbation = 0; // 0 -> 90
-let rotationSpeedMax = 0; // 1 -> 20*/
 
 // global print
 let panelSide;
-let tileSize = 150;
+let tileSize = 25;
 
 // sound management
 let spectrum;
@@ -44,16 +29,13 @@ function setup() {
   angleMode(DEGREES);
   rectMode(CENTER);
   background(0);
-  frameRate(5);
+  frameRate(25);
 
   panelSide = width / tileSize;
   parametersPanelManager = new ParametersPanelManager(false);
-  rectangleManager = new RectangleManager();
-  rectangleManager.createRectangleList();
-  rectangleManager.drawRectangleList();
+  rectangleManager = new RectangleManager().setup();
 
   fft = new p5.FFT();
-
   sound.amp(1);
   sound.play();
   sound.jump(100, 30);
@@ -63,12 +45,8 @@ function draw() {
   background(0);
   spectrum = fft.analyze();
 
-  rectangleManager.drawRectangleList();
+  rectangleManager.draw();
   //processSound();
-
-  //updateScaleChance();
-  //updateOpacityChance();
-  //updateAngleChance();
 
   parametersPanelManager.print(getParameters());
 }
@@ -108,6 +86,7 @@ function keyPressed() {
     parametersPanelManager.changeVisibility();
   }
 }
+
 function getParameters() {
   return [
     ["[1.S] scaleChance", rectangleManager.scaleChance],

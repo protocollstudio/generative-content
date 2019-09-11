@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-09-11 11:32:35
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 12:03:36
+* @Last Modified time: 2019-09-11 14:35:01
 */
 
 // need p5
@@ -24,6 +24,25 @@ class RectangleManager {
     this.angleChance = 0; // 0 -> 100
     this.initAnglePerturbation = 0; // 0 -> 90
     this.rotationSpeedMax = 0; // 1 -> 20
+
+    return this;
+  }
+
+  setup() {
+    this.createRectangleList();
+    this.draw();
+
+    return this;
+  }
+
+  draw() {
+    this.drawRectangleList();
+
+    //updateScaleChance();
+    //updateOpacityChance();
+    //updateAngleChance();
+
+    return this;
   }
 
   createRectangleList() {
@@ -34,6 +53,8 @@ class RectangleManager {
         //console.log("["+ this.rectList.length - 1 +"] = " + this.rectList[this.rectList.length - 1].hypotenuse);
       }
     }
+
+    return this;
   }
 
   drawRectangleList() {
@@ -45,6 +66,8 @@ class RectangleManager {
       this.editAngle(rectangle);
       rectangle.draw();
     });
+
+    return this;
   }
 
 
