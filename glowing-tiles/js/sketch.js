@@ -2,25 +2,22 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 14:37:51
+* @Last Modified time: 2019-09-11 14:57:35
 */
+
+let soundAvg;
 
 // global print
 let panelSide;
 let tileSize = 25;
 
-// sound management
-let spectrum;
-let fft;
-let sound;
-let soundAvg = 0;
-
 // managers
 let parametersPanelManager;
 let rectangleManager;
+let audioReactiveManager;
 
 function preload(){
-  sound = loadSound('assets/lille.mp3');
+  audioReactiveManager = new AudioReactiveManager().preload();
 }
 
 function setup() {
@@ -34,50 +31,15 @@ function setup() {
   panelSide = width / tileSize;
   parametersPanelManager = new ParametersPanelManager(false);
   rectangleManager = new RectangleManager().setup();
-
-  fft = new p5.FFT();
-  sound.amp(1);
-  sound.play();
-  sound.jump(100, 30);
+  audioReactiveManager.setup();
 }
 
 function draw() {
   background(0);
-  spectrum = fft.analyze();
-
   rectangleManager.draw();
-  //processSound();
-
+  audioReactiveManager.analyse().processSound();
   parametersPanelManager.print(getParameters());
 }
-
-function processSound() {
-  if (spectrum !== undefined) {
-    let spectrumSize = 200;
-    //let spectrumSize = spectrum.length;
-    let initSize = 500;
-    let total = 0;
-
-    for (var i = initSize; i < initSize + spectrumSize; i++){
-      total += spectrum[i];
-      /*fill(255,0,0);
-      var x = map(i, 0, spectrum.length, 0, width);
-      var h = -height + map(spectrum[i], 0, 255, height, 0);
-      rect(x, height, width / spectrum.length, h);*/
-    }
-    let newAvg = int(total / (spectrumSize));
-    let spaceBetweenAvgMax = 5;
-    soundAvg = abs(newAvg - soundAvg) > spaceBetweenAvgMax ? newAvg : soundAvg;
-    /*textSize(50);
-    fill(89, 255, 200);
-    text(soundAvg, 10, 100);
-    if (soundAvg * 4 > 255) {
-      text(">255", 10, 160);
-    }*/
-  }
-}
-
-
 
 // PANEL
 
