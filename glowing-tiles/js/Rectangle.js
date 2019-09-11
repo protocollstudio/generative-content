@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-08-23 15:52:46
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-26 22:30:29
+* @Last Modified time: 2019-09-11 10:24:33
 */
 
 class Rectangle {
@@ -18,6 +18,10 @@ class Rectangle {
     this.scaleX = 1;
     this.scaleY = 1;
     this.opacity = random(0, 255);
+    this.updateRotationSpeed();
+  }
+
+  updateRotationSpeed() {
     this.rotationSpeed = random(-rotationSpeedMax,rotationSpeedMax);
   }
 
@@ -41,9 +45,10 @@ class Rectangle {
     let green = map(mouseY, 0, windowWidth, 0, 255);
     let blue = map(mouseX, 0, windowWidth, 0, 255);
 */
-    let red = map(soundAvg * 2, 0, 255, 0, 255);
-    let green = 50;
-    let blue = 50;
+//    let red = map(soundAvg * 2, 0, 255, 0, 255);
+    let red = 255;
+    let green = 255;
+    let blue = 255;
 
     fill(red,green,blue,this.opacity);
     rect(0, 0, this.width, this.height);
