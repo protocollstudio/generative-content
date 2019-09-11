@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-08-21 11:12:07
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:01:28
+* @Last Modified time: 2019-09-11 11:29:38
 */
 
 class ParametersPanelManager {
@@ -17,7 +17,7 @@ class ParametersPanelManager {
 	    this.parameterOffset = 45;
 	    this.xOffset = 20;
 
-	    this.panelBgColor = color(0, 0, 0, 500);
+	    this.panelBgColor = color(0, 0, 0, 200);
 	    this.panelWidth = 1200;
 	    this.panelHeight = 1200;
 
@@ -32,17 +32,23 @@ class ParametersPanelManager {
 	    	return;
 	    }
 
+	    // draw background
 	    fill(this.panelBgColor);
 	    strokeWeight(0);
 	    rect(0, 0, this.panelWidth, this.panelHeight);
 
-	    fill(this.panelTextColor);
+	    this.printTitle();
+	    this.printParameters(parameterList);
+	}
 
+	printTitle() {
+		fill(this.panelTextColor);
 	    textSize(this.titleTextSize);
 	    text("Parameters", this.xOffset, 100);
+	}
 
-	    textSize(this.normalTextSize);
-
+	printParameters(parameterList) {
+		textSize(this.normalTextSize);
 	    parameterList.forEach((value, index) => {
 	      text(value[0] + " = " + value[1], this.xOffset + 20, this.titleTextSize + 20 + this.parameterOffset * (index + 1));
 	    });

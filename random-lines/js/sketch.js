@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-23 15:11:17
+* @Last Modified time: 2019-09-11 11:12:10
 */
 
 var delay = 0;
@@ -10,7 +10,6 @@ var lineManager;
 var parametersPanelManager;
 
 function setup() {
-  //createCanvas(1920, 1080);
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   lineManager = new LineManager(width, height);
@@ -31,10 +30,6 @@ function mouseWheel() {
   lineManager.reset();
 }
 
-function mouseMoved() {
-  //lineManager.mouseMoved(mouseX, mouseY);
-}
-
 function keyPressed() {
   lineManager.keyPressed();
   if (keyCode == ENTER) {
@@ -44,18 +39,18 @@ function keyPressed() {
 
 function getParameters() {
   return [
-    ["jumpProbability", this.lineManager.jumpProbability],
-    ["jumpDistance", this.lineManager.jumpDistance],
-    ["jumpDistanceRoom", this.lineManager.jumpDistanceRoom],
+    ["jumpProbability", lineManager.jumpProbability],
+    ["jumpDistance", lineManager.jumpDistance],
+    ["jumpDistanceRoom", lineManager.jumpDistanceRoom],
 
-    ["bendProbability", this.lineManager.bendProbability],
-    ["bendDuration", this.lineManager.bendDuration],
-    ["bendAmplitude", this.lineManager.bendAmplitude],
-    ["bendAmplitudeRoom", this.lineManager.bendAmplitudeRoom],
+    ["bendProbability", lineManager.bendProbability],
+    ["bendDuration", lineManager.bendDuration],
+    ["bendAmplitude", lineManager.bendAmplitude],
+    ["bendAmplitudeRoom", lineManager.bendAmplitudeRoom],
 
-    ["lineNumberMax", this.lineManager.lineNumberMax],
-    ["line number", this.lineManager.lineList.length],
-    ["aberationProbability", this.lineManager.aberationProbability]
+    ["lineNumberMax", lineManager.lineNumberMax],
+    ["line number", lineManager.lineList.length],
+    ["aberationProbability", lineManager.aberationProbability]
   ];
 }
 
@@ -118,7 +113,7 @@ midiMixManager.addEventListener(EVENT.TRACK_02_KNOB_02, (e) => {
 function refreshLineNumber(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = 100;
-  this.lineManager.updateLineNumber(velocity, 127);
+  lineManager.updateLineNumber(velocity, 127);
 }
 
 // ---- BEND
@@ -127,22 +122,22 @@ function refreshLineNumber(velocity) {
 function refreshBendProbability(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = 100;
-  this.lineManager.bendProbability = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  lineManager.bendProbability = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
 function refreshBendDuration(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = 100;
-  this.lineManager.bendDuration = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  lineManager.bendDuration = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
 function refreshBendAmplitude(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = 150;
-  this.lineManager.bendAmplitude = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  lineManager.bendAmplitude = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
 function refreshBendAmplitudeRoom(velocity) {
   let parameterValueMin = 0;
-  let parameterValueMax = this.lineManager.bendAmplitude;
-  this.lineManager.bendAmplitudeRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  let parameterValueMax = lineManager.bendAmplitude;
+  lineManager.bendAmplitudeRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
 
 
@@ -152,15 +147,15 @@ function refreshBendAmplitudeRoom(velocity) {
 function refreshJumpProbability(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = 100;
-  this.lineManager.jumpProbability = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  lineManager.jumpProbability = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
 function refreshJumpDistance(velocity) {
   let parameterValueMin = 0;
   let parameterValueMax = 100;
-  this.lineManager.jumpDistance = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  lineManager.jumpDistance = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
 function refreshJumpDistanceRoom(velocity) {
   let parameterValueMin = 0;
-  let parameterValueMax = this.lineManager.jumpDistance;
-  this.lineManager.jumpDistanceRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
+  let parameterValueMax = lineManager.jumpDistance;
+  lineManager.jumpDistanceRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }

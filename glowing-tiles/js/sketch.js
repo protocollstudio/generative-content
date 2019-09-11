@@ -2,11 +2,8 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:01:45
+* @Last Modified time: 2019-09-11 11:26:27
 */
-
-let globalWidth = 800;
-let globalHeight = 800;
 
 let gAngle = 0; // to delete
 let x = 200; // to delete
@@ -54,7 +51,6 @@ function setup() {
   panelSide = width / tileSize;
   createRectangleList();
   drawRectangleList();
-  drawRandomRectangleInterval = setInterval(drawRandomRectangle, 0);
   parametersPanelManager = new ParametersPanelManager(false);
 
   fft = new p5.FFT();
@@ -65,6 +61,7 @@ function setup() {
 }
 
 function draw() {
+  background(0);
   spectrum = fft.analyze();
 
   drawRectangleList();
@@ -121,10 +118,6 @@ function drawRectangleList() {
     rectangle.draw();
   });
 }
-function drawRandomRectangle() {
-  let index = int(random(0, rectList.length));
-  rectList[index].draw();
-}
 
 
 function editScale(rectangle) {
@@ -178,9 +171,6 @@ function getParameters() {
     ["[M.S] tileSize", tileSize]
   ];
 }
-
-
-
 
 
 // MIDI
