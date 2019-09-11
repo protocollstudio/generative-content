@@ -2,10 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-10 13:23:17
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 10:21:36
+* @Last Modified time: 2019-09-11 15:12:24
 */
 
-WebMidi.enable((err) => {
+/*WebMidi.enable((err) => {
 
     if (err) {
         console.log("WebMidi could not be enabled.", err);
@@ -135,6 +135,7 @@ function selectEventType(note) {
 
     return eventType;
 }
+*/
 
 function mapVelocityToParameter(velocity, parameterValueMin = 0, parameterValueMax = 100, rounded = true) {
     let mapped =  map(velocity, 0, 127, parameterValueMin, parameterValueMax);
