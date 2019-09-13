@@ -2,8 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 16:12:37
+* @Last Modified time: 2019-09-13 16:42:49
 */
+
+import ParametersPanelManager from "/js/ParametersPanelManager.js"
 
 let soundAvg;
 

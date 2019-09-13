@@ -2,10 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-21 11:12:07
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:29:38
+* @Last Modified time: 2019-09-13 16:41:30
 */
 
-class ParametersPanelManager {
+export default class ParametersPanelManager {
 	constructor(isVisible = false) {
 		// DI
 		//
