@@ -2,21 +2,26 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:03
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 15:25:46
+* @Last Modified time: 2019-09-13 16:20:10
 */
 
 // need MIDI_NOTE
 // need EVENT
 
 class MidiMixController extends EventTarget {
-  constructor(color) {
+
+  constructor() {
     super();
     this._name = "MIDI Mix";
-    this._color = color;
+
+    this.velocityMaxValue = 127;
+    this.velocityMinValue = 0;
+    this.defaultMapMinValue = 0;
+    this.defaultMapMaxValue = 100;
+
   }
 
   get name() { return this._name; }
-  get color() { return this._color; }
 
   selectEventType(note) {
       let eventType = EVENT.ALL;
@@ -50,8 +55,27 @@ class MidiMixController extends EventTarget {
       return eventType;
   }
 
+  linkControlToEvent(event, callback) {
+    // if (event is in not EVENT) {
+    //    return "exception de que l'event y connais po"
+    // "}
+    midiMixController.addEventListener(event, callback);
+  }
+
+  addControl(event, object, property, rounded = false) {
+    this.linkControlToEvent(event, (e) => {
+      object[property] = midiMixController.mapVelocityToParameter(e.detail.velocity, this.defaultMapMinValue, this.defaultMapMaxValue, rounded);;
+    })
+  }
+
+  addControlWithValues(event, object, property, minValue, maxValue, rounded = false) {
+    this.linkControlToEvent(event, (e) => {
+      object[property] = midiMixController.mapVelocityToParameter(e.detail.velocity, minValue, maxValue, rounded);;
+    })
+  }
+
   mapVelocityToParameter(velocity, parameterValueMin = 0, parameterValueMax = 100, rounded = true) {
-      let mapped =  map(velocity, 0, 127, parameterValueMin, parameterValueMax);
+      let mapped =  map(velocity, this.velocityMinValue, this.velocityMaxValue, parameterValueMin, parameterValueMax);
       return rounded ? int(mapped) : mapped;
   }
 
