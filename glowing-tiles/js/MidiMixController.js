@@ -2,12 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:03
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 16:20:10
+* @Last Modified time: 2019-09-13 21:20:05
 */
-
-// need MIDI_NOTE
-// need EVENT
-
+/*
+import MIDI_NOTE from "/js/MIDI_NOTE.js"
+import EVENT from "/js/EVENT.js"
+*/
 class MidiMixController extends EventTarget {
 
   constructor() {
