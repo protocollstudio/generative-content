@@ -2,10 +2,11 @@
 * @Author: OMAO
 * @Date:   2019-08-21 11:12:07
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 16:41:30
+* @Last Modified time: 2019-09-16 16:28:30
 */
 
-export default class ParametersPanelManager {
+/*export default class ParametersPanelManager {*/
+class ParametersPanelManager {
 	constructor(isVisible = false) {
 		// DI
 		//
@@ -62,3 +63,6 @@ export default class ParametersPanelManager {
 		this.isVisible = !this.isVisible;
 	}
 }
+
+//export
+//let parametersPanelManager = new ParametersPanelManager();

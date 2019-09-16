@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-09-11 14:44:33
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 14:56:04
+* @Last Modified time: 2019-09-16 16:22:50
 */
 
 // need global
@@ -63,7 +63,7 @@ class AudioReactiveManager {
     if (this.soundAvg * 4 > 255) {
       text(">255", 10, 160);
     }*/
-    soundAvg = this.soundAvg;
+    configurationManager.soundAvg = this.soundAvg;
 
     return this;
   }

@@ -2,16 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-07 11:39:48
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 21:20:57
+* @Last Modified time: 2019-09-16 16:38:57
 */
 
-import ParametersPanelManager from "/js/ParametersPanelManager.js"
-
-let soundAvg;
-
-// global print
-let panelSide;
-let tileSize = 25;
+// import ParametersPanelManager from "/js/ParametersPanelManager.js"
 
 // managers
 let parametersPanelManager;
@@ -32,7 +26,7 @@ function setup() {
   background(0);
   frameRate(25);
 
-  panelSide = width / tileSize;
+  configurationManager.init();
   parametersPanelManager = new ParametersPanelManager(false);
   rectangleManager = new RectangleManager().setup();
   audioReactiveManager.setup();
@@ -72,7 +66,7 @@ function getParameters() {
     ["[3.1] rotationSpeedMax", rectangleManager.rotationSpeedMax],
     ["initAnglePerturbation", rectangleManager.initAnglePerturbation],
 
-    ["[M.S] tileSize", tileSize]
+    ["[M.S] tileSize", configurationManager.tileSize]
   ];
 }
 
@@ -85,3 +79,7 @@ function setupMidi() {
   midiMixController.addControl(EVENT.TRACK_03_SLIDER, rectangleManager, "angleChance");
   midiMixController.addControlWithValues(EVENT.TRACK_03_KNOB_01, rectangleManager, "rotationSpeedMax", 1, 50);
 }
+
+window.preload = preload;
+window.setup = setup;
+window.draw = draw;
