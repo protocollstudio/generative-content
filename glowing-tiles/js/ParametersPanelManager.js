@@ -1,8 +1,8 @@
 /*
 * @Author: OMAO
-* @Date:   2019-08-21 11:12:07
+* @Date:   2019-09-16 16:39:50
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-16 16:28:30
+* @Last Modified time: 2019-09-16 16:40:14
 */
 
 /*export default class ParametersPanelManager {*/
