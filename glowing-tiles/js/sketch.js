@@ -2,10 +2,11 @@
 * @Author: OMAO
 * @Date:   2019-09-16 16:39:49
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-19 23:35:42
+* @Last Modified time: 2019-09-19 23:41:41
 */
 
-import {p5} from "./p5_wrapper.js"
+import p5 from 'p5';
+import "p5/lib/addons/p5.sound";
 import {audioReactiveManager} from "./AudioReactiveManager.js"
 // import {parametersPanelManager} from "/js/ParametersPanelManager.js"
 
