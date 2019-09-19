@@ -2,20 +2,22 @@
 * @Author: OMAO
 * @Date:   2019-09-16 16:39:49
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-16 16:40:52
+* @Last Modified time: 2019-09-19 23:35:42
 */
 
-// import ParametersPanelManager from "/js/ParametersPanelManager.js"
+import {p5} from "./p5_wrapper.js"
+import {audioReactiveManager} from "./AudioReactiveManager.js"
+// import {parametersPanelManager} from "/js/ParametersPanelManager.js"
 
 // managers
 let parametersPanelManager;
 let rectangleManager;
-let audioReactiveManager;
+//let audioReactiveManager;
 let midiMixController;
 let midiManager;
 
-function preload(){
-  audioReactiveManager = new AudioReactiveManager().preload();
+function preload() {
+  audioReactiveManager.preload();// = new AudioReactiveManager().preload();
 }
 
 function setup() {

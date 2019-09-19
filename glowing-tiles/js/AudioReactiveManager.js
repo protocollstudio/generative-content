@@ -2,11 +2,14 @@
 * @Author: OMAO
 * @Date:   2019-09-11 14:44:33
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-16 16:22:50
+* @Last Modified time: 2019-09-19 23:35:44
 */
 
 // need global
 // need p5
+
+import p5Lib from 'p5';
+import {p5} from "./p5_wrapper.js"
 
 class AudioReactiveManager {
 
@@ -23,7 +26,7 @@ class AudioReactiveManager {
   }
 
   setup() {
-    this.fft = new p5.FFT();
+    this.fft = new p5Lib.FFT();
     this.sound.amp(1);
     this.sound.play();
     this.sound.jump(100, 30);
@@ -69,3 +72,4 @@ class AudioReactiveManager {
   }
 
 }
+export let audioReactiveManager = new AudioReactiveManager();
