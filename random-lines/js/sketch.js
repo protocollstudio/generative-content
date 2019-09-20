@@ -2,10 +2,9 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:12:10
+* @Last Modified time: 2019-09-20 16:12:36
 */
 
-var delay = 0;
 var lineManager;
 var parametersPanelManager;
 
