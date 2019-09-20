@@ -4,7 +4,8 @@
   "description": "",
   "main": "sketch.js",
   "scripts": {
-    "start": "browser-sync start --server -f -w"
+    "start-webpack": "webpack-dev-server",
+    "start-browser-sync": "browser-sync start --server -f -w"
   },
   "license": "ISC",
   "dependencies": {

@@ -2,31 +2,33 @@
 * @Author: OMAO
 * @Date:   2019-09-16 16:39:50
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-19 23:08:07
+* @Last Modified time: 2019-09-20 15:03:51
 */
 
-// import p5 from "p5"
+// need p5 global
 
 class ParametersPanelManager {
-  constructor(isVisible = false) {
+  constructor() {
     // DI
     //
 
     // parameters
     //
-      this.titleTextSize = 100;
-      this.normalTextSize = 30;
-      this.parameterOffset = 45;
-      this.xOffset = 20;
+    this.titleTextSize = 100;
+    this.normalTextSize = 30;
+    this.parameterOffset = 45;
+    this.xOffset = 20;
 
-      this.panelBgColor = color(0, 0, 0, 200);
-      this.panelWidth = 1200;
-      this.panelHeight = 1200;
+    //this.panelBgColor = color(0, 0, 0, 200);
+    this.panelBgColor = 12;
+    this.panelWidth = 1200;
+    this.panelHeight = 1200;
 
-      this.panelTextColor = color(0, 200, 153);
-
-      this.isVisible = isVisible;
-
+    //this.panelTextColor = color(0, 200, 153);
+    this.panelTextColor = 200;
+  }
+  setup(isVisible = false) {
+    this.isVisible = isVisible;
   }
 
   print(parameterList) {
@@ -44,7 +46,7 @@ class ParametersPanelManager {
   }
 
   printTitle() {
-    this.p5.fill(this.panelTextColor);
+      fill(this.panelTextColor);
       textSize(this.titleTextSize);
       text("Parameters", this.xOffset, 100);
   }
@@ -65,4 +67,4 @@ class ParametersPanelManager {
   }
 }
 
-// export let parametersPanelManager = new ParametersPanelManager();
+export let parametersPanelManager = new ParametersPanelManager();

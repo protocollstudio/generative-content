@@ -2,12 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-09-16 14:01:44
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-16 16:16:00
+* @Last Modified time: 2019-09-20 15:03:44
 */
 
-//need p5
+// need p5 global
 
-class ConfigurationManager {
+class Configuration {
   constructor() {
     this.panelSide;
     this.tileSize = 25;
@@ -19,5 +19,4 @@ class ConfigurationManager {
   }
 }
 
-//export
-let configurationManager = new ConfigurationManager();
+export let configuration = new Configuration();

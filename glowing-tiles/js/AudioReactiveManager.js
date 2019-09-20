@@ -2,11 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-09-11 14:44:33
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-19 23:39:46
+* @Last Modified time: 2019-09-20 15:03:35
 */
 
+// need p5 global
 import p5 from 'p5';
-// import {p5} from "./p5_wrapper.js"
+import {configuration} from "./Configuration.js";
 
 class AudioReactiveManager {
 
@@ -63,7 +64,7 @@ class AudioReactiveManager {
     if (this.soundAvg * 4 > 255) {
       text(">255", 10, 160);
     }*/
-    configurationManager.soundAvg = this.soundAvg;
+    configuration.soundAvg = this.soundAvg;
 
     return this;
   }

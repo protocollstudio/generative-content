@@ -2,41 +2,38 @@
 * @Author: OMAO
 * @Date:   2019-09-16 16:39:49
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-19 23:41:41
+* @Last Modified time: 2019-09-20 15:00:44
 */
 
 import p5 from 'p5';
 import "p5/lib/addons/p5.sound";
+import {configuration} from "./Configuration.js";
 import {audioReactiveManager} from "./AudioReactiveManager.js"
-// import {parametersPanelManager} from "/js/ParametersPanelManager.js"
-
-// managers
-let parametersPanelManager;
-let rectangleManager;
-//let audioReactiveManager;
-let midiMixController;
-let midiManager;
+import {EVENT} from "./EVENT.js"
+import {midiMixController} from "./MidiMixController.js"
+import {parametersPanelManager} from "./ParametersPanelManager.js"
+import {midiManager} from "./MidiManager.js"
+import {rectangleManager} from "./RectangleManager.js"
 
 function preload() {
-  audioReactiveManager.preload();// = new AudioReactiveManager().preload();
+  if (getAudioContext().state !== 'running') {
+    getAudioContext().resume();
+  }
+  audioReactiveManager.preload();
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   angleMode(DEGREES);
   rectMode(CENTER);
   background(0);
   frameRate(25);
 
-  configurationManager.init();
-  parametersPanelManager = new ParametersPanelManager(false);
-  rectangleManager = new RectangleManager().setup();
+  configuration.init();
+  parametersPanelManager.setup(false);
+  rectangleManager.setup();
   audioReactiveManager.setup();
-
-  midiMixController = new MidiMixController();
   setupMidi();
-  midiManager = new MidiManager(midiMixController);
   midiManager.setup();
 }
 
@@ -69,7 +66,7 @@ function getParameters() {
     ["[3.1] rotationSpeedMax", rectangleManager.rotationSpeedMax],
     ["initAnglePerturbation", rectangleManager.initAnglePerturbation],
 
-    ["[M.S] tileSize", configurationManager.tileSize]
+    ["[M.S] tileSize", configuration.tileSize]
   ];
 }
 

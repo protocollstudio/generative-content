@@ -2,11 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:39
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 21:20:36
+* @Last Modified time: 2019-09-20 15:03:15
 */
 
-//export default const EVENT = {
-const EVENT = {
+export const EVENT = {
     ALL: "event-all",
     MASTER_SLIDER : "event-master-slider",
 

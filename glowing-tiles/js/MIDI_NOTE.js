@@ -2,11 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:23
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 21:20:28
+* @Last Modified time: 2019-09-20 15:01:20
 */
 
-//export default const MIDI_NOTE = {
-const MIDI_NOTE = {
+export const MIDI_NOTE = {
     MASTER_SLIDER: 62,
 
     TRACK_01_KNOB_01: 16,
