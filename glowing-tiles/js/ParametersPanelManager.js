@@ -2,18 +2,13 @@
 * @Author: OMAO
 * @Date:   2019-09-16 16:39:50
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:03:51
+* @Last Modified time: 2019-09-20 16:08:42
 */
 
 // need p5 global
 
 class ParametersPanelManager {
   constructor() {
-    // DI
-    //
-
-    // parameters
-    //
     this.titleTextSize = 100;
     this.normalTextSize = 30;
     this.parameterOffset = 45;
