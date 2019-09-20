@@ -2,10 +2,10 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:17:16
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-08-16 13:28:58
+* @Last Modified time: 2019-09-20 16:34:38
 */
 
-class GlitchLine {
+export class GlitchLine {
 
 	constructor(color, position, speed, weight) {
 		this.color = color;

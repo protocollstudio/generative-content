@@ -2,7 +2,7 @@
 * @Author: OMAO
 * @Date:   2019-09-11 14:44:33
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:03:35
+* @Last Modified time: 2019-09-20 16:09:06
 */
 
 // need p5 global
@@ -27,7 +27,7 @@ class AudioReactiveManager {
     this.fft = new p5.FFT();
     this.sound.amp(1);
     this.sound.play();
-    this.sound.jump(100, 30);
+    this.sound.jump(120, 5);
     return this;
   }
 
