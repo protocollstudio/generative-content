@@ -2,10 +2,10 @@
 * @Author: OMAO
 * @Date:   2019-08-10 13:23:17
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 15:36:09
+* @Last Modified time: 2019-09-20 14:43:20
 */
 
-// need midiMixController
+import {midiMixController} from "./MidiMixController.js";
 
 class MidiManager {
 
@@ -71,3 +71,4 @@ class MidiManager {
   }
 
 }
+export let midiManager = new MidiManager(midiMixController);

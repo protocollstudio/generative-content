@@ -2,11 +2,13 @@
 * @Author: OMAO
 * @Date:   2019-09-11 11:32:35
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 14:35:01
+* @Last Modified time: 2019-09-20 15:03:58
 */
 
-// need p5
-// need Rectangle
+// need p5 global
+
+import {Rectangle} from "./Rectangle.js";
+import {configuration} from "./Configuration.js";
 
 class RectangleManager {
 
@@ -46,10 +48,10 @@ class RectangleManager {
   }
 
   createRectangleList() {
-    for(let i = 0; i < panelSide; i++) {
-      for(let j = 0; j < panelSide; j++) {
-        let side = random(tileSize * this.rectScaleInitMin, tileSize * this.rectScaleInitMax);
-        this.rectList.push(new Rectangle(i * tileSize, j * tileSize, side, side, random(0,this.initAnglePerturbation), this.rotationSpeedMax));
+    for(let i = 0; i < configuration.panelSide; i++) {
+      for(let j = 0; j < configuration.panelSide; j++) {
+        let side = random(configuration.tileSize * this.rectScaleInitMin, configuration.tileSize * this.rectScaleInitMax);
+        this.rectList.push(new Rectangle(i * configuration.tileSize, j * configuration.tileSize, side, side, random(0,this.initAnglePerturbation), this.rotationSpeedMax));
         //console.log("["+ this.rectList.length - 1 +"] = " + this.rectList[this.rectList.length - 1].hypotenuse);
       }
     }
@@ -99,3 +101,4 @@ class RectangleManager {
   updateAngleChance() { this.angleChance = (mouseY / height) * 100; }
 
 }
+export let rectangleManager = new RectangleManager();

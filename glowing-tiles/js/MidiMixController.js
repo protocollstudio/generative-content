@@ -2,11 +2,11 @@
 * @Author: OMAO
 * @Date:   2019-08-22 12:43:03
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 16:20:10
+* @Last Modified time: 2019-09-20 14:29:16
 */
 
-// need MIDI_NOTE
-// need EVENT
+import {MIDI_NOTE} from "./MIDI_NOTE.js"
+import {EVENT} from "./EVENT.js"
 
 class MidiMixController extends EventTarget {
 
@@ -80,4 +80,4 @@ class MidiMixController extends EventTarget {
   }
 
 };
-
+export let midiMixController = new MidiMixController();

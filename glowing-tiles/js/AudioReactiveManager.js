@@ -2,11 +2,12 @@
 * @Author: OMAO
 * @Date:   2019-09-11 14:44:33
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 14:56:04
+* @Last Modified time: 2019-09-20 15:03:35
 */
 
-// need global
-// need p5
+// need p5 global
+import p5 from 'p5';
+import {configuration} from "./Configuration.js";
 
 class AudioReactiveManager {
 
@@ -18,7 +19,7 @@ class AudioReactiveManager {
 
   preload() {
     this.sound = loadSound(this.soundFilePath);
-
+    console.log(loadSound);
     return this;
   }
 
@@ -63,9 +64,10 @@ class AudioReactiveManager {
     if (this.soundAvg * 4 > 255) {
       text(">255", 10, 160);
     }*/
-    soundAvg = this.soundAvg;
+    configuration.soundAvg = this.soundAvg;
 
     return this;
   }
 
 }
+export let audioReactiveManager = new AudioReactiveManager();

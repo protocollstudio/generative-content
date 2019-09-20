@@ -1,43 +1,39 @@
 /*
 * @Author: OMAO
-* @Date:   2019-08-07 11:39:48
+* @Date:   2019-09-16 16:39:49
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-13 16:12:37
+* @Last Modified time: 2019-09-20 15:00:44
 */
 
-let soundAvg;
+import p5 from 'p5';
+import "p5/lib/addons/p5.sound";
+import {configuration} from "./Configuration.js";
+import {audioReactiveManager} from "./AudioReactiveManager.js"
+import {EVENT} from "./EVENT.js"
+import {midiMixController} from "./MidiMixController.js"
+import {parametersPanelManager} from "./ParametersPanelManager.js"
+import {midiManager} from "./MidiManager.js"
+import {rectangleManager} from "./RectangleManager.js"
 
-// global print
-let panelSide;
-let tileSize = 25;
-
-// managers
-let parametersPanelManager;
-let rectangleManager;
-let audioReactiveManager;
-let midiMixController;
-let midiManager;
-
-function preload(){
-  audioReactiveManager = new AudioReactiveManager().preload();
+function preload() {
+  if (getAudioContext().state !== 'running') {
+    getAudioContext().resume();
+  }
+  audioReactiveManager.preload();
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   angleMode(DEGREES);
   rectMode(CENTER);
   background(0);
   frameRate(25);
 
-  panelSide = width / tileSize;
-  parametersPanelManager = new ParametersPanelManager(false);
-  rectangleManager = new RectangleManager().setup();
+  configuration.init();
+  parametersPanelManager.setup(false);
+  rectangleManager.setup();
   audioReactiveManager.setup();
-
-  midiMixController = new MidiMixController();
   setupMidi();
-  midiManager = new MidiManager(midiMixController);
   midiManager.setup();
 }
 
@@ -70,7 +66,7 @@ function getParameters() {
     ["[3.1] rotationSpeedMax", rectangleManager.rotationSpeedMax],
     ["initAnglePerturbation", rectangleManager.initAnglePerturbation],
 
-    ["[M.S] tileSize", tileSize]
+    ["[M.S] tileSize", configuration.tileSize]
   ];
 }
 
@@ -83,3 +79,7 @@ function setupMidi() {
   midiMixController.addControl(EVENT.TRACK_03_SLIDER, rectangleManager, "angleChance");
   midiMixController.addControlWithValues(EVENT.TRACK_03_KNOB_01, rectangleManager, "rotationSpeedMax", 1, 50);
 }
+
+window.preload = preload;
+window.setup = setup;
+window.draw = draw;

@@ -4,10 +4,18 @@
   "description": "",
   "main": "sketch.js",
   "scripts": {
-    "start": "browser-sync start --server -f -w"
+    "start-webpack": "webpack-dev-server",
+    "start-browser-sync": "browser-sync start --server -f -w"
   },
   "license": "ISC",
   "dependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "^2.26.7",
+    "p5": "^0.9.0",
+    "webmidi": "^2.5.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
   }
 }
