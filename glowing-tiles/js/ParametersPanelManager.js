@@ -2,28 +2,27 @@
 * @Author: OMAO
 * @Date:   2019-09-16 16:39:50
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:08:42
+* @Last Modified time: 2019-09-20 17:00:43
 */
 
 // need p5 global
 
 class ParametersPanelManager {
   constructor() {
+  }
+  setup(isVisible = false) {
+    this.isVisible = isVisible;
+
     this.titleTextSize = 100;
     this.normalTextSize = 30;
     this.parameterOffset = 45;
     this.xOffset = 20;
 
-    //this.panelBgColor = color(0, 0, 0, 200);
-    this.panelBgColor = 12;
+    this.panelBgColor = color(0, 0, 0, 200);
     this.panelWidth = 1200;
     this.panelHeight = 1200;
 
-    //this.panelTextColor = color(0, 200, 153);
-    this.panelTextColor = 200;
-  }
-  setup(isVisible = false) {
-    this.isVisible = isVisible;
+    this.panelTextColor = color(0, 200, 153);
   }
 
   print(parameterList) {
