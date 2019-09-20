@@ -2,8 +2,11 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:37:26
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-11 11:37:44
+* @Last Modified time: 2019-09-20 16:42:05
 */
+
+import p5 from 'p5';
+import {GlitchLine} from "./GlitchLine.js"
 
 class LineManager {
 
@@ -90,12 +93,6 @@ class LineManager {
 
   }
 
-  keyPressed() {
-    if (keyCode === ENTER) {
-      //this.promptParameters();
-    }
-  }
-
   reset() {
     this.lineList = [];
   }
@@ -106,3 +103,4 @@ class LineManager {
 
 }
 
+export let lineManager = new LineManager();

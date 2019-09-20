@@ -2,35 +2,39 @@
 * @Author: OMAO
 * @Date:   2018-09-05 08:12:52
 * @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:12:36
+* @Last Modified time: 2019-09-20 17:00:13
 */
 
-var lineManager;
-var parametersPanelManager;
+import p5 from 'p5';
+import "p5/lib/addons/p5.sound";
+import {EVENT} from "./EVENT.js"
+import {lineManager} from "./LineManager.js";
+import {midiMixController} from "./MidiMixController.js"
+import {parametersPanelManager} from "./ParametersPanelManager.js"
+import {midiManager} from "./MidiManager.js"
+
+//var lineManager;
+//var parametersPanelManager;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
-  lineManager = new LineManager(width, height);
-  parametersPanelManager = new ParametersPanelManager(false);
+  //lineManager = new LineManager(width, height);
+  //parametersPanelManager = new ParametersPanelManager(false);
   lineManager.generateLineList();
-  refreshAll();
+  parametersPanelManager.setup(true);
+  setupMidi();
+  midiManager.setup();
 }
 
 function draw() {
   background(0);
   lineManager.draw();
-  if (parametersPanelManager.isVisible) {
-    parametersPanelManager.print(getParameters());
-  }
-}
-
-function mouseWheel() {
-  lineManager.reset();
+  parametersPanelManager.print(getParameters());
 }
 
 function keyPressed() {
-  lineManager.keyPressed();
+  console.log("keypressed");
   if (keyCode == ENTER) {
     parametersPanelManager.changeVisibility();
   }
@@ -54,19 +58,8 @@ function getParameters() {
 }
 
 
-function refreshAll() {
-/*  refreshLineNumber();
-  refreshBendProbability();
-  refreshBendDuration();
-  refreshBendAmplitude();
-  refreshBendAmplitudeRoom();
-  refreshJumpProbability();
-  refreshJumpDistance();
-  refreshJumpDistanceRoom();*/
-}
 
-
-// ---- MASTER
+/*// ---- MASTER
 // ----------------
 
 midiMixManager.addEventListener(EVENT.MASTER_SLIDER, (e) => {
@@ -158,3 +151,21 @@ function refreshJumpDistanceRoom(velocity) {
   let parameterValueMax = lineManager.jumpDistance;
   lineManager.jumpDistanceRoom = int(map(velocity, 0, 127, parameterValueMin, parameterValueMax));
 }
+
+*/
+
+function setupMidi() {
+  midiMixController.linkControlToEvent(EVENT.MASTER_SLIDER, (e) => { lineManager.updateLineNumber(e.detail.velocity, 127); });
+  midiMixController.addControlWithValues(EVENT.TRACK_01_SLIDER, lineManager, "bendProbability", 0, 100);
+  midiMixController.addControlWithValues(EVENT.TRACK_01_KNOB_01, lineManager, "bendDuration", 0, 100);
+  midiMixController.addControlWithValues(EVENT.TRACK_01_KNOB_02, lineManager, "bendAmplitude", 0, 150);
+  midiMixController.addControlWithValues(EVENT.TRACK_01_KNOB_03, lineManager, "bendAmplitudeRoom", 0, 50); //lineManager.bendAmplitude
+  midiMixController.addControlWithValues(EVENT.TRACK_02_SLIDER, lineManager, "jumpProbability", 0, 100);
+  midiMixController.addControlWithValues(EVENT.TRACK_02_KNOB_01, lineManager, "jumpDistance", 0, 100);
+  midiMixController.addControlWithValues(EVENT.TRACK_02_KNOB_02, lineManager, "jumpDistanceRoom", 0, 100); //lineManager.jumpDistance
+}
+
+//window.preload = preload;
+window.setup = setup;
+window.draw = draw;
+window.keyPressed = keyPressed;
