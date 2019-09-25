@@ -5,9 +5,8 @@
 * @Last Modified time: 2019-09-20 16:09:06
 */
 
-// need p5 global
 import p5 from 'p5';
-import {configuration} from "./Configuration.js";
+import { configuration } from "./Configuration.js";
 
 class AudioReactiveManager {
 
@@ -46,7 +45,7 @@ class AudioReactiveManager {
     let initSize = 500;
     let total = 0;
 
-    for (var i = initSize; i < initSize + spectrumSize; i++){
+    for (var i = initSize; i < initSize + spectrumSize; i++) {
       total += this.spectrum[i];
       /*
         fill(255,0,0);

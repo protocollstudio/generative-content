@@ -7,11 +7,11 @@
 
 import p5 from 'p5';
 import "p5/lib/addons/p5.sound";
-import {EVENT} from "./EVENT.js"
-import {lineManager} from "./LineManager.js";
-import {midiMixController} from "./MidiMixController.js"
-import {parametersPanelManager} from "./ParametersPanelManager.js"
-import {midiManager} from "./MidiManager.js"
+import { EVENT } from "./EVENT.js"
+import { lineManager } from "./LineManager.js";
+import { midiMixController } from "./MidiMixController.js"
+import { parametersPanelManager } from "./ParametersPanelManager.js"
+import { midiManager } from "./MidiManager.js"
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

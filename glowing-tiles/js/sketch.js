@@ -7,13 +7,13 @@
 
 import p5 from 'p5';
 import "p5/lib/addons/p5.sound";
-import {configuration} from "./Configuration.js";
-import {audioReactiveManager} from "./AudioReactiveManager.js"
-import {EVENT} from "./EVENT.js"
-import {midiMixController} from "./MidiMixController.js"
-import {parametersPanelManager} from "./ParametersPanelManager.js"
-import {midiManager} from "./MidiManager.js"
-import {rectangleManager} from "./RectangleManager.js"
+import { configuration } from "./Configuration.js";
+import { audioReactiveManager } from "./AudioReactiveManager.js"
+import { EVENT } from "./EVENT.js"
+import { midiMixController } from "./MidiMixController.js"
+import { parametersPanelManager } from "./ParametersPanelManager.js"
+import { midiManager } from "./MidiManager.js"
+import { rectangleManager } from "./RectangleManager.js"
 
 function preload() {
   if (getAudioContext().state !== 'running') {

@@ -5,8 +5,8 @@
 * @Last Modified time: 2019-09-20 16:55:06
 */
 
-import {MIDI_NOTE} from "./MIDI_NOTE.js"
-import {EVENT} from "./EVENT.js"
+import { MIDI_NOTE } from "./MIDI_NOTE.js"
+import { EVENT } from "./EVENT.js"
 
 class MidiMixController extends EventTarget {
 
@@ -24,35 +24,35 @@ class MidiMixController extends EventTarget {
   get name() { return this._name; }
 
   selectEventType(note) {
-      let eventType = EVENT.ALL;
+    let eventType = EVENT.ALL;
 
-      let eventNoteMapping = [
-        [MIDI_NOTE.MASTER_SLIDER, EVENT.MASTER_SLIDER],
-        [MIDI_NOTE.TRACK_01_KNOB_01, EVENT.TRACK_01_KNOB_01],
-        [MIDI_NOTE.TRACK_01_KNOB_02, EVENT.TRACK_01_KNOB_02],
-        [MIDI_NOTE.TRACK_01_KNOB_03, EVENT.TRACK_01_KNOB_03],
-        [MIDI_NOTE.TRACK_01_SLIDER, EVENT.TRACK_01_SLIDER],
-        [MIDI_NOTE.TRACK_02_KNOB_01, EVENT.TRACK_02_KNOB_01],
-        [MIDI_NOTE.TRACK_02_KNOB_02, EVENT.TRACK_02_KNOB_02],
-        [MIDI_NOTE.TRACK_02_KNOB_03, EVENT.TRACK_02_KNOB_03],
-        [MIDI_NOTE.TRACK_02_SLIDER, EVENT.TRACK_02_SLIDER],
-        [MIDI_NOTE.TRACK_03_KNOB_01, EVENT.TRACK_03_KNOB_01],
-        [MIDI_NOTE.TRACK_03_KNOB_02, EVENT.TRACK_03_KNOB_02],
-        [MIDI_NOTE.TRACK_03_KNOB_03, EVENT.TRACK_03_KNOB_03],
-        [MIDI_NOTE.TRACK_03_SLIDER, EVENT.TRACK_03_SLIDER],
-        [MIDI_NOTE.TRACK_04_KNOB_01, EVENT.TRACK_04_KNOB_01],
-        [MIDI_NOTE.TRACK_04_KNOB_02, EVENT.TRACK_04_KNOB_02],
-        [MIDI_NOTE.TRACK_04_KNOB_03, EVENT.TRACK_04_KNOB_03],
-        [MIDI_NOTE.TRACK_04_SLIDER, EVENT.TRACK_04_SLIDER]
-      ];
+    let eventNoteMapping = [
+      [MIDI_NOTE.MASTER_SLIDER, EVENT.MASTER_SLIDER],
+      [MIDI_NOTE.TRACK_01_KNOB_01, EVENT.TRACK_01_KNOB_01],
+      [MIDI_NOTE.TRACK_01_KNOB_02, EVENT.TRACK_01_KNOB_02],
+      [MIDI_NOTE.TRACK_01_KNOB_03, EVENT.TRACK_01_KNOB_03],
+      [MIDI_NOTE.TRACK_01_SLIDER, EVENT.TRACK_01_SLIDER],
+      [MIDI_NOTE.TRACK_02_KNOB_01, EVENT.TRACK_02_KNOB_01],
+      [MIDI_NOTE.TRACK_02_KNOB_02, EVENT.TRACK_02_KNOB_02],
+      [MIDI_NOTE.TRACK_02_KNOB_03, EVENT.TRACK_02_KNOB_03],
+      [MIDI_NOTE.TRACK_02_SLIDER, EVENT.TRACK_02_SLIDER],
+      [MIDI_NOTE.TRACK_03_KNOB_01, EVENT.TRACK_03_KNOB_01],
+      [MIDI_NOTE.TRACK_03_KNOB_02, EVENT.TRACK_03_KNOB_02],
+      [MIDI_NOTE.TRACK_03_KNOB_03, EVENT.TRACK_03_KNOB_03],
+      [MIDI_NOTE.TRACK_03_SLIDER, EVENT.TRACK_03_SLIDER],
+      [MIDI_NOTE.TRACK_04_KNOB_01, EVENT.TRACK_04_KNOB_01],
+      [MIDI_NOTE.TRACK_04_KNOB_02, EVENT.TRACK_04_KNOB_02],
+      [MIDI_NOTE.TRACK_04_KNOB_03, EVENT.TRACK_04_KNOB_03],
+      [MIDI_NOTE.TRACK_04_SLIDER, EVENT.TRACK_04_SLIDER]
+    ];
 
-      eventNoteMapping.forEach( function(mapping, index) {
-        if (note == mapping[0]) {
-          eventType = mapping[1];
-        }
-      });
+    eventNoteMapping.forEach(function (mapping, index) {
+      if (note == mapping[0]) {
+        eventType = mapping[1];
+      }
+    });
 
-      return eventType;
+    return eventType;
   }
 
   linkControlToEvent(event, callback) {
@@ -75,8 +75,8 @@ class MidiMixController extends EventTarget {
   }
 
   mapVelocityToParameter(velocity, parameterValueMin = 0, parameterValueMax = 100, rounded = true) {
-      let mapped =  map(velocity, this.velocityMinValue, this.velocityMaxValue, parameterValueMin, parameterValueMax);
-      return rounded ? int(mapped) : mapped;
+    let mapped = map(velocity, this.velocityMinValue, this.velocityMaxValue, parameterValueMin, parameterValueMax);
+    return rounded ? int(mapped) : mapped;
   }
 
 };

@@ -26,30 +26,30 @@ class ParametersPanelManager {
   }
 
   print(parameterList) {
-      if (!this.isVisible) {
-        return;
-      }
+    if (!this.isVisible) {
+      return;
+    }
 
-      // draw background
-      fill(this.panelBgColor);
-      strokeWeight(0);
-      rect(0, 0, this.panelWidth, this.panelHeight);
+    // draw background
+    fill(this.panelBgColor);
+    strokeWeight(0);
+    rect(0, 0, this.panelWidth, this.panelHeight);
 
-      this.printTitle();
-      this.printParameters(parameterList);
+    this.printTitle();
+    this.printParameters(parameterList);
   }
 
   printTitle() {
-      fill(this.panelTextColor);
-      textSize(this.titleTextSize);
-      text("Parameters", this.xOffset, 100);
+    fill(this.panelTextColor);
+    textSize(this.titleTextSize);
+    text("Parameters", this.xOffset, 100);
   }
 
   printParameters(parameterList) {
     textSize(this.normalTextSize);
-      parameterList.forEach((value, index) => {
-        text(value[0] + " = " + value[1], this.xOffset + 20, this.titleTextSize + 20 + this.parameterOffset * (index + 1));
-      });
+    parameterList.forEach((value, index) => {
+      text(value[0] + " = " + value[1], this.xOffset + 20, this.titleTextSize + 20 + this.parameterOffset * (index + 1));
+    });
   }
 
   isVisible() {

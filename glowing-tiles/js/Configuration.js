@@ -5,8 +5,6 @@
 * @Last Modified time: 2019-09-20 15:55:30
 */
 
-// need p5 global
-
 class Configuration {
   constructor() {
     this.panelSide;

@@ -6,29 +6,29 @@
 */
 
 import p5 from 'p5';
-import {GlitchLine} from "./GlitchLine.js"
+import { GlitchLine } from "./GlitchLine.js"
 
 class LineManager {
 
   constructor() {
     this.lineList = [];
-    this.lineNumberMax        = 200;
+    this.lineNumberMax = 200;
 
     // 0 -> 100
-    this.jumpProbability      = 0;
+    this.jumpProbability = 0;
     // 0 -> 100
-    this.jumpDistance         = 30;
+    this.jumpDistance = 30;
     // 0 -> jumpDistance
-    this.jumpDistanceRoom     = 10;
+    this.jumpDistanceRoom = 10;
 
     // 0 -> 100
-    this.bendProbability      = 10;
+    this.bendProbability = 10;
     // 2 -> 100
-    this.bendDuration         = 100;
+    this.bendDuration = 100;
     // 0 -> 150
-    this.bendAmplitude        = 2;
+    this.bendAmplitude = 2;
     // 0 -> bendAmplitude
-    this.bendAmplitudeRoom    = 0;
+    this.bendAmplitudeRoom = 0;
 
     // 0 -> 100
     this.aberationProbability = 0;
@@ -38,7 +38,7 @@ class LineManager {
   // methods
 
   generateLineList(max = this.lineNumberMax) {
-    for(let i = 0; i < random(0,max); i++) {
+    for (let i = 0; i < random(0, max); i++) {
       this.generateLine();
     }
   }
@@ -54,22 +54,22 @@ class LineManager {
 
   draw() {
     this.lineList.forEach((line) => {
-        if (random(0,100) < this.aberationProbability) {
-          line.drawAberation();
-        }
+      if (random(0, 100) < this.aberationProbability) {
+        line.drawAberation();
+      }
 
-        line.draw();
+      line.draw();
       line.move();
 
-      if (random(0,100) < this.jumpProbability) {
+      if (random(0, 100) < this.jumpProbability) {
         line.jump(random(this.jumpDistance - this.jumpDistanceRoom, this.jumpDistance + this.jumpDistanceRoom)); // Distance par bon (+/- la marge)
       }
 
-      if (!line.isBending && random(0,100) < this.bendProbability) {
+      if (!line.isBending && random(0, 100) < this.bendProbability) {
         // var bendDelayMax = ;
         line.glitchBend(this.bendDuration); // Longueur du bend (exprimé en nombre de frame)
       }
-      if (line.isBending){
+      if (line.isBending) {
         line.bend(random(this.bendAmplitude - this.bendAmplitudeRoom, this.bendAmplitude + this.bendAmplitudeRoom)); // Amplitude du bend (exprimé en nombre de pixels déplacés par frame)
       }
 
@@ -85,7 +85,7 @@ class LineManager {
   updateLineNumber(currentValue, maxValue) {
     let lineCount = int(map(currentValue, 0, maxValue, 0, this.lineNumberMax));
     if (lineCount < this.lineList.length) {
-      this.lineList = this.lineList.slice(0,lineCount);
+      this.lineList = this.lineList.slice(0, lineCount);
     }
     else {
       this.generateLineList(lineCount - this.lineList.length);
