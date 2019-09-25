@@ -8,4 +8,12 @@
 - all modules code in a repertory
 
 ## glowing-tiles
+
+
+
 ## random-lines
+
+- epaisseur de ligne
+- bend avec rotation
+- transformation de lignes
+- plus de parametres
