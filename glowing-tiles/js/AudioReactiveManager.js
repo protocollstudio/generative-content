@@ -10,7 +10,7 @@ import { configuration } from "./Configuration.js";
 
 class AudioReactiveManager {
 
-  constructor(soundFilePath = 'assets/lille.mp3') {
+  constructor(soundFilePath = 'glowing-tiles/assets/lille.mp3') {
     this.soundFilePath = soundFilePath;
     this.soundAvg = 0
     return this;
