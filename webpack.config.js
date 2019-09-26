@@ -18,7 +18,8 @@ module.exports = {
   resolve: {
     alias: {
       Modules: path.resolve(__dirname, 'modules/'),
-      Node: path.resolve(__dirname, 'node_modules/')
+      Node: path.resolve(__dirname, 'node_modules/'),
+      Assets: path.resolve(__dirname, 'assets/')
     }
   }
 };

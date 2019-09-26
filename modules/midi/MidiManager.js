@@ -5,7 +5,7 @@
 * @Last Modified time: 2019-09-20 16:06:18
 */
 
-import { midiMixController } from "./MidiMixController.js";
+import { midiMixController } from "Modules/midi/MidiMixController.js";
 
 class MidiManager {
 

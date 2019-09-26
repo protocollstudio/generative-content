@@ -6,11 +6,12 @@
 */
 
 import p5 from 'p5';
-import { configuration } from "./Configuration.js";
+// import { configuration } from "./Configuration.js";
+// impossible d'importer un module spécifique dans un module générique ! anyé !
 
 class AudioReactiveManager {
 
-  constructor(soundFilePath = 'glowing-tiles/assets/lille.mp3') {
+  constructor(soundFilePath = 'Assets/lille.mp3') {
     this.soundFilePath = soundFilePath;
     this.soundAvg = 0
     return this;
@@ -63,7 +64,7 @@ class AudioReactiveManager {
     if (this.soundAvg * 4 > 255) {
       text(">255", 10, 160);
     }*/
-    configuration.soundAvg = this.soundAvg;
+    // configuration.soundAvg = this.soundAvg;
 
     return this;
   }

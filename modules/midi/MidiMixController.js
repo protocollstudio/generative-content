@@ -5,8 +5,8 @@
 * @Last Modified time: 2019-09-20 14:29:16
 */
 
-import { MIDI_NOTE } from "./MIDI_NOTE.js"
-import { EVENT } from "./EVENT.js"
+import { MIDI_NOTE } from "Modules/midi/MIDI_NOTE.js"
+import { EVENT } from "Modules/midi/EVENT.js"
 
 class MidiMixController extends EventTarget {
 
