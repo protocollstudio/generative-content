@@ -5,12 +5,7 @@
   "main": "sketch.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
-    "start-browser-sync": "browser-sync start --server -f -w",
-    "postinstall": "link-module-alias"
-  },
-  "_moduleAliases": {
-    "@modules": "modules/",
-    "@node": "node_modules/"
+    "start-browser-sync": "browser-sync start --server -f -w"
   },
   "license": "ISC",
   "dependencies": {
