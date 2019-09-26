@@ -5,7 +5,12 @@
   "main": "sketch.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
-    "start-browser-sync": "browser-sync start --server -f -w"
+    "start-browser-sync": "browser-sync start --server -f -w",
+    "postinstall": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "@modules": "modules/",
+    "@node": "node_modules/"
   },
   "license": "ISC",
   "dependencies": {
@@ -14,6 +19,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "link-module-alias": "^1.2.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"
