@@ -1,7 +1,7 @@
 alert("coucou");
 
-import p5 from '@node/p5';
-import { parametersPanelManager } from "@modules/ParametersPanelManager.js"
+import p5 from 'Node/p5';
+import { parametersPanelManager } from "Modules/ParametersPanelManager.js"
 
 export function setupPouet() {
   alert("pouet");

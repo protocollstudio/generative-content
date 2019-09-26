@@ -14,5 +14,11 @@ module.exports = {
     filename: "bundle.js"
   },
   mode: "development",
-  watch: true
+  watch: true,
+  resolve: {
+    alias: {
+      Modules: path.resolve(__dirname, 'modules/'),
+      Node: path.resolve(__dirname, 'node_modules/')
+    }
+  }
 };
