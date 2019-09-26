@@ -5,14 +5,14 @@ import { parametersPanelManager } from "@modules/ParametersPanelManager.js"
 
 export function setupPouet() {
   alert("pouet");
-  fill(255);
-  textSize(10));
-  text("POUET", 10, 100);
   parametersPanelManager.setup(true);
 }
 
 export function drawMyPouet() {
   parametersPanelManager.print();
+  fill(255);
+  textSize(50);
+  text("POUET", 10, 200);
 }
 
 
