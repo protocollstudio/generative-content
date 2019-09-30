@@ -1,8 +1,7 @@
 class ParametersPanelManager {
-  constructor() {
-  }
   setup(isVisible = false) {
     this.isVisible = isVisible;
+    this.changeVisibilityKey = ENTER;
 
     this.titleTextSize = 100;
     this.normalTextSize = 30;
@@ -16,7 +15,7 @@ class ParametersPanelManager {
     this.panelTextColor = color(0, 200, 153);
   }
 
-  print(parameterList) {
+  draw(parameterList) {
     if (!this.isVisible) {
       return;
     }
@@ -28,6 +27,12 @@ class ParametersPanelManager {
 
     this.printTitle();
     this.printParameters(parameterList);
+  }
+
+  keyPressed() {
+    if (keyCode == this.changeVisibilityKey) {
+      this.changeVisibility();
+    }
   }
 
   printTitle() {

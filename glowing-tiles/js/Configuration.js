@@ -4,7 +4,7 @@ class Configuration {
     this.tileSize = 25;
     this.soundAvg;
   }
-  init() {
+  setup() {
     this.panelSide = width / this.tileSize;
   }
 }

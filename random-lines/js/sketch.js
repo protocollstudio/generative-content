@@ -17,14 +17,11 @@ export function setup() {
 export function draw() {
   background(0);
   lineManager.draw();
-  parametersPanelManager.print(getParameters());
+  parametersPanelManager.draw(getParameters());
 }
 
 export function keyPressed() {
-  console.log("keypressed");
-  if (keyCode == ENTER) {
-    parametersPanelManager.changeVisibility();
-  }
+  parametersPanelManager.keyPressed();
 }
 
 export function getParameters() {

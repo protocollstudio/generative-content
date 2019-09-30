@@ -12,7 +12,6 @@ class AudioReactiveManager {
 
   preload() {
     this.sound = loadSound(this.soundFilePath);
-    console.log(loadSound);
     return this;
   }
 

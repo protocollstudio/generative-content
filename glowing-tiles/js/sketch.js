@@ -22,7 +22,7 @@ export function setup() {
   background(0);
   frameRate(25);
 
-  configuration.init();
+  configuration.setup();
   parametersPanelManager.setup(false);
   rectangleManager.setup();
   audioReactiveManager.setup();
@@ -33,14 +33,13 @@ export function setup() {
 export function draw() {
   background(0);
   rectangleManager.draw();
-  audioReactiveManager.analyse().processSound();
-  parametersPanelManager.print(getParameters());
+  audioReactiveManager.analyse()
+                      .processSound();
+  parametersPanelManager.draw(getParameters());
 }
 
 export function keyPressed() {
-  if (keyCode == ENTER) {
-    parametersPanelManager.changeVisibility();
-  }
+  parametersPanelManager.keyPressed();
 }
 
 function getParameters() {
