@@ -8,14 +8,14 @@ import { configuration } from "./Configuration.js";
 import { rectangleManager } from "./RectangleManager.js";
 
 
-function preload() {
+export function preload() {
   if (getAudioContext().state !== 'running') {
     getAudioContext().resume();
   }
   audioReactiveManager.preload();
 }
 
-function setup() {
+export function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   rectMode(CENTER);
@@ -30,14 +30,14 @@ function setup() {
   midiManager.setup();
 }
 
-function draw() {
+export function draw() {
   background(0);
   rectangleManager.draw();
   audioReactiveManager.analyse().processSound();
   parametersPanelManager.print(getParameters());
 }
 
-function keyPressed() {
+export function keyPressed() {
   if (keyCode == ENTER) {
     parametersPanelManager.changeVisibility();
   }
@@ -71,7 +71,7 @@ function setupMidi() {
   midiMixController.addControlWithValues(EVENT.TRACK_03_KNOB_01, rectangleManager, "rotationSpeedMax", 1, 50);
 }
 
-window.preload = preload;
-window.setup = setup;
-window.draw = draw;
-window.keyPressed = keyPressed;
+// window.preload = preload;
+// window.setup = setup;
+// window.draw = draw;
+// window.keyPressed = keyPressed;

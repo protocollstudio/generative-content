@@ -5,7 +5,7 @@ import { midiManager } from "Modules/midi/MidiManager.js"
 
 import { lineManager } from "./LineManager.js";
 
-function setup() {
+export function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   lineManager.generateLineList();
@@ -14,20 +14,20 @@ function setup() {
   midiManager.setup();
 }
 
-function draw() {
+export function draw() {
   background(0);
   lineManager.draw();
   parametersPanelManager.print(getParameters());
 }
 
-function keyPressed() {
+export function keyPressed() {
   console.log("keypressed");
   if (keyCode == ENTER) {
     parametersPanelManager.changeVisibility();
   }
 }
 
-function getParameters() {
+export function getParameters() {
   return [
     ["jumpProbability", lineManager.jumpProbability],
     ["jumpDistance", lineManager.jumpDistance],
@@ -54,8 +54,3 @@ function setupMidi() {
   midiMixController.addControlWithValues(EVENT.TRACK_02_KNOB_01, lineManager, "jumpDistance", 0, 100);
   midiMixController.addControlWithValues(EVENT.TRACK_02_KNOB_02, lineManager, "jumpDistanceRoom", 0, 100); //lineManager.jumpDistance
 }
-
-//window.preload = preload;
-window.setup = setup;
-window.draw = draw;
-window.keyPressed = keyPressed;
