@@ -1,10 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-08-22 12:43:03
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 14:29:16
-*/
-
 import { MIDI_NOTE } from "Modules/midi/MIDI_NOTE.js"
 import { EVENT } from "Modules/midi/EVENT.js"
 

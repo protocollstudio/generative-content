@@ -1,8 +1,8 @@
 {
-  "name": "random-lines",
-  "version": "1.0.0",
+  "name": "generative-content",
+  "version": "0.0.1",
   "description": "",
-  "main": "sketch.js",
+  "main": "app.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
     "start-browser-sync": "browser-sync start --server -f -w"

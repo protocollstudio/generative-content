@@ -1,10 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-11 14:44:33
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:09:06
-*/
-
 import p5 from 'p5';
 // import { configuration } from "./Configuration.js";
 // impossible d'importer un module spécifique dans un module générique ! anyé !

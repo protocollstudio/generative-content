@@ -37,8 +37,6 @@ function draw() {
   parametersPanelManager.print(getParameters());
 }
 
-// PANEL
-
 function keyPressed() {
   if (keyCode == ENTER) {
     parametersPanelManager.changeVisibility();
@@ -76,3 +74,4 @@ function setupMidi() {
 window.preload = preload;
 window.setup = setup;
 window.draw = draw;
+window.keyPressed = keyPressed;

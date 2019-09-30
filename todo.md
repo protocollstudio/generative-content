@@ -14,6 +14,8 @@
 ## sub-projects
 ### glowing-tiles
 
+- fix audio context problem
+
 ### random-lines
 
 - epaisseur de ligne
