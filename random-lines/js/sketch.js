@@ -5,13 +5,12 @@
 * @Last Modified time: 2019-09-20 17:04:01
 */
 
-import p5 from 'p5';
-import "p5/lib/addons/p5.sound";
-import { EVENT } from "./EVENT.js"
+import { EVENT } from "Modules/midi/EVENT.js"
+import { midiMixController } from "Modules/midi/MidiMixController.js"
+import { parametersPanelManager } from "Modules/ParametersPanelManager.js"
+import { midiManager } from "Modules/midi/MidiManager.js"
+
 import { lineManager } from "./LineManager.js";
-import { midiMixController } from "./MidiMixController.js"
-import { parametersPanelManager } from "./ParametersPanelManager.js"
-import { midiManager } from "./MidiManager.js"
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

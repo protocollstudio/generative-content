@@ -5,7 +5,6 @@
 * @Last Modified time: 2019-09-20 16:42:05
 */
 
-import p5 from 'p5';
 import { GlitchLine } from "./GlitchLine.js"
 
 class LineManager {
