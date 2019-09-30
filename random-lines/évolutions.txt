@@ -1,4 +1,0 @@
-- epaisseur de ligne
-- bend avec rotation
-- transformation de lignes
-- plus de parametres

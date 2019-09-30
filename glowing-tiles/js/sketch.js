@@ -1,19 +1,12 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-16 16:39:49
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:07:46
-*/
+import { audioReactiveManager } from "Modules/AudioReactiveManager.js";
+import { EVENT } from "Modules/midi/EVENT.js";
+import { midiManager } from "Modules/midi/MidiManager.js";
+import { midiMixController } from "Modules/midi/MidiMixController.js";
+import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
 
-import p5 from 'p5';
-import "p5/lib/addons/p5.sound";
-import {configuration} from "./Configuration.js";
-import {audioReactiveManager} from "./AudioReactiveManager.js"
-import {EVENT} from "./EVENT.js"
-import {midiMixController} from "./MidiMixController.js"
-import {parametersPanelManager} from "./ParametersPanelManager.js"
-import {midiManager} from "./MidiManager.js"
-import {rectangleManager} from "./RectangleManager.js"
+import { configuration } from "./Configuration.js";
+import { rectangleManager } from "./RectangleManager.js";
+
 
 function preload() {
   if (getAudioContext().state !== 'running') {

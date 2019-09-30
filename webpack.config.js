@@ -8,10 +8,18 @@
 var path = require("path");
 
 module.exports = {
-  entry: "./js/sketch.js",
+  entry: "./app.js",
   output: {
     path: path.resolve(__dirname),
     filename: "bundle.js"
   },
-  mode: "development"
+  mode: "development",
+  watch: true,
+  resolve: {
+    alias: {
+      Modules: path.resolve(__dirname, 'modules/'),
+      Node: path.resolve(__dirname, 'node_modules/'),
+      Assets: path.resolve(__dirname, 'assets/')
+    }
+  }
 };

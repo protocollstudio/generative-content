@@ -1,14 +1,5 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-11 11:32:35
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:03:58
-*/
-
-// need p5 global
-
-import {Rectangle} from "./Rectangle.js";
-import {configuration} from "./Configuration.js";
+import { Rectangle } from "./Rectangle.js";
+import { configuration } from "./Configuration.js";
 
 class RectangleManager {
 
@@ -48,10 +39,10 @@ class RectangleManager {
   }
 
   createRectangleList() {
-    for(let i = 0; i < configuration.panelSide; i++) {
-      for(let j = 0; j < configuration.panelSide; j++) {
+    for (let i = 0; i < configuration.panelSide; i++) {
+      for (let j = 0; j < configuration.panelSide; j++) {
         let side = random(configuration.tileSize * this.rectScaleInitMin, configuration.tileSize * this.rectScaleInitMax);
-        this.rectList.push(new Rectangle(i * configuration.tileSize, j * configuration.tileSize, side, side, random(0,this.initAnglePerturbation), this.rotationSpeedMax));
+        this.rectList.push(new Rectangle(i * configuration.tileSize, j * configuration.tileSize, side, side, random(0, this.initAnglePerturbation), this.rotationSpeedMax));
         //console.log("["+ this.rectList.length - 1 +"] = " + this.rectList[this.rectList.length - 1].hypotenuse);
       }
     }
@@ -74,7 +65,7 @@ class RectangleManager {
 
 
   editScale(rectangle) {
-    if (random(0,100) <= this.scaleChance) {
+    if (random(0, 100) <= this.scaleChance) {
       let scaleAmount = random(this.scaleAmountMin, this.scaleAmountMax);
       //let scaleAmount = map(soundAvg, 0, 255, 0, scaleAmountMax);
       //scaleAmountMax = map(mouseX, 0, width, 0, 7);
@@ -84,13 +75,13 @@ class RectangleManager {
   }
 
   editOpacity(rectangle) {
-    if (random(0,100) <= this.opacityChance) {
+    if (random(0, 100) <= this.opacityChance) {
       rectangle.opacity = random(0, 255);
     }
   }
 
   editAngle(rectangle) {
-    if (random(0,100) <= this.angleChance) {
+    if (random(0, 100) <= this.angleChance) {
       rectangle.angle += rectangle.rotationSpeed;
     }
   }
