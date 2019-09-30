@@ -1,10 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-16 16:39:49
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:07:46
-*/
-
 import { audioReactiveManager } from "Modules/AudioReactiveManager.js";
 import { EVENT } from "Modules/midi/EVENT.js";
 import { midiManager } from "Modules/midi/MidiManager.js";

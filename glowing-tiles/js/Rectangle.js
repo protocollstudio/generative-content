@@ -1,12 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-08-23 15:52:46
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:03:54
-*/
-
-// need p5 global
-
 export class Rectangle {
 
   constructor(x, y, rectangleWidth, rectangleHeight, angle, rotationSpeedMax) {

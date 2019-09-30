@@ -1,10 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2018-09-05 08:12:52
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 17:04:01
-*/
-
 import { EVENT } from "Modules/midi/EVENT.js"
 import { midiMixController } from "Modules/midi/MidiMixController.js"
 import { parametersPanelManager } from "Modules/ParametersPanelManager.js"

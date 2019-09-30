@@ -1,10 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2018-09-05 08:17:16
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:34:38
-*/
-
 export class GlitchLine {
 
   constructor(color, position, speed, weight) {

@@ -1,10 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-16 14:01:44
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:55:30
-*/
-
 class Configuration {
   constructor() {
     this.panelSide;

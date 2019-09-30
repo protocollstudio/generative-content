@@ -1,12 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-11 11:32:35
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:03:58
-*/
-
-// need p5 global
-
 import { Rectangle } from "./Rectangle.js";
 import { configuration } from "./Configuration.js";
 

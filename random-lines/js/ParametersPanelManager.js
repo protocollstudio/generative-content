@@ -1,12 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-16 16:39:50
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 17:00:43
-*/
-
-// need p5 global
-
 class ParametersPanelManager {
   constructor() {
   }
