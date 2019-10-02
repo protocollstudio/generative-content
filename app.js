@@ -1,6 +1,6 @@
 import p5 from 'Node/p5';
-import "p5/lib/addons/p5.sound";
-import "lodash";
+import "Node/p5/lib/addons/p5.sound";
+import "Node/lodash";
 
 // sketches list
 
