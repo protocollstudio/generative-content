@@ -16,6 +16,10 @@ function setup() {
   stroke(40);
   frameRate(30);
   parametersPanelManager.setup(false);
+
+  for (let i = 0; i < nbAgents; i++) {
+    agents.push(createVector(random(360), random(360)));
+  }
 }
 
 function draw() {
@@ -24,6 +28,25 @@ function draw() {
   // camera setup
   createCamera();
 
+  let radius = 300;
+
+  for (let i = 0; i < nbAgents - 1; i++) {
+    agents[i].x += noise(increment);
+    agents[i].y += noise(increment + 100);
+    c1 = spherePoint(radius, agents[i].x, agents[i].y);
+    for (let j = 0; j < nbAgents; j++) {
+      c2 = spherePoint(radius, agents[j].x, agents[i].y);
+      if (dist(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z) < 60 && i != j) {
+        strokeWeight(1);
+        stroke(50, 50);
+        line(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z);
+      }
+    }
+    strokeWeight(4);
+    stroke(50);
+    point(c1.x, c1.y, c1.z);
+  }
+  increment += 0.01;
 }
 
 function spherePoint(radius, u, v) {
