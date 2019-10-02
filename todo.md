@@ -14,6 +14,7 @@
 
 - split update and draw function : is there a way to do it natively ?
 - generate dynamically
+- solve AudioContext error
 
 ## sub-projects
 ### glowing-tiles
