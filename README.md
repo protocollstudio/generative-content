@@ -10,3 +10,5 @@ collection of generative-content
 ## milestones
 
 - dependance injections in class constructors
+- put sketches in one sketches directory
+
