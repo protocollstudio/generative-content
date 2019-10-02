@@ -33,13 +33,13 @@ function draw() {
 
   let radius = 300;
 
-  for (let i = 0; i < nbAgents - 1; i++) {
+  for (let i = 0; i < agents.length() - 1; i++) {
     agents[i].x += noise(increment);
     agents[i].y += noise(increment + 100);
     c1 = spherePoint(radius, agents[i].x, agents[i].y);
-    for (let j = 0; j < nbAgents; j++) {
+    for (let j = 0; j < agents.length(); j++) {
       c2 = spherePoint(radius, agents[j].x, agents[i].y);
-      if (dist(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z) < 60 && i != j) {
+      if (dist(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z) < 50 && i != j) {
         strokeWeight(1);
         stroke(50, 50);
         line(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z);
