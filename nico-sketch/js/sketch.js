@@ -1,4 +1,5 @@
 import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
+import { configuration } from "./configuration.js"
 
 export { setup, draw };
 
@@ -12,5 +13,6 @@ function setup() {
 }
 
 function draw() {
-  ellipse(200, 200, 50, 50);
+  background(bgcolor);
 }
+
