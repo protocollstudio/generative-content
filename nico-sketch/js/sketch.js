@@ -1,5 +1,7 @@
 import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
 
+export { setup, draw };
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(230);
@@ -10,5 +12,5 @@ function setup() {
 }
 
 function draw() {
-  ellipse(200, 200);
+  ellipse(200, 200, 50, 50);
 }
