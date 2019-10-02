@@ -32,18 +32,16 @@ function keyPressed() {
 
 function getParameters() {
   return [
-    ["jumpProbability", lineManager.jumpProbability],
-    ["jumpDistance", lineManager.jumpDistance],
-    ["jumpDistanceRoom", lineManager.jumpDistanceRoom],
-
-    ["bendProbability", lineManager.bendProbability],
-    ["bendDuration", lineManager.bendDuration],
-    ["bendAmplitude", lineManager.bendAmplitude],
-    ["bendAmplitudeRoom", lineManager.bendAmplitudeRoom],
-
-    ["lineNumberMax", lineManager.lineNumberMax],
-    ["line number", lineManager.lineList.length],
-    ["aberationProbability", lineManager.aberationProbability]
+    parametersPanelManager.createParameter("jumpProbability", lineManager, "jumpProbability"),
+    parametersPanelManager.createParameter("jumpDistance", lineManager, "jumpDistance"),
+    parametersPanelManager.createParameter("jumpDistanceRoom", lineManager, "jumpDistanceRoom"),
+    parametersPanelManager.createParameter("bendProbability", lineManager, "bendProbability"),
+    parametersPanelManager.createParameter("bendDuration", lineManager, "bendDuration"),
+    parametersPanelManager.createParameter("bendAmplitude", lineManager, "bendAmplitude"),
+    parametersPanelManager.createParameter("bendAmplitudeRoom", lineManager, "bendAmplitudeRoom"),
+    parametersPanelManager.createParameter("lineNumberMax", lineManager, "lineNumberMax"),
+    parametersPanelManager.createParameter("line number", lineManager, "lineList.length"),
+    parametersPanelManager.createParameter("aberationProbability", lineManager, "aberationProbability")
   ];
 }
 

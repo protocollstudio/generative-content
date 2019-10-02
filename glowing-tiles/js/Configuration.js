@@ -1,10 +1,7 @@
 class Configuration {
-  constructor() {
-    this.panelSide;
+  setup() {
     this.tileSize = 25;
     this.soundAvg;
-  }
-  setup() {
     this.panelSide = width / this.tileSize;
   }
 }
