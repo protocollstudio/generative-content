@@ -3,7 +3,7 @@ import "p5/lib/addons/p5.sound";
 
 // import * as rl from "./random-lines/js/sketch.js"
 // import * as gt from "./glowing-tiles/js/sketch.js"
-import * as ns from "./sphere-agents/js/sketch.js.js"
+import * as ns from "./sphere-agents/js/sketch.js"
 
 let currentSketch = ns; // use the sketch you want to see :)
 
