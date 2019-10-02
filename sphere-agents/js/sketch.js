@@ -3,12 +3,10 @@ import { configuration } from "./configuration.js"
 
 export { setup, draw };
 
-let vec, c1, c2;
+let c1, c2;
 let increment = 0;
 let nbAgents = 200;
 let agents = [];
-
-
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -33,11 +31,11 @@ function draw() {
 
   let radius = 300;
 
-  for (let i = 0; i < agents.length() - 1; i++) {
+  for (let i = 0; i < agents.length - 1; i++) {
     agents[i].x += noise(increment);
     agents[i].y += noise(increment + 100);
     c1 = spherePoint(radius, agents[i].x, agents[i].y);
-    for (let j = 0; j < agents.length(); j++) {
+    for (let j = 0; j < agents.length; j++) {
       c2 = spherePoint(radius, agents[j].x, agents[i].y);
       if (dist(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z) < 50 && i != j) {
         strokeWeight(1);
@@ -53,7 +51,7 @@ function draw() {
 }
 
 function spherePoint(radius, u, v) {
-  vec = createVector();
+  let vec = createVector();
   u = radians(u);
   v = radians(v);
   vec.x = radius * cos(u) * cos(v);
@@ -61,4 +59,3 @@ function spherePoint(radius, u, v) {
   vec.z = radius * sin(v);
   return vec;
 }
-
