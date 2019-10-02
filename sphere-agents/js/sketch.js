@@ -5,7 +5,7 @@ export { setup, draw };
 
 let c1, c2;
 let increment = 0;
-let nbAgents = 200;
+let nbAgents = 50;
 let agents = [];
 
 function setup() {
@@ -43,7 +43,7 @@ function draw() {
         line(c1.x, c1.y, c1.z, c2.x, c2.y, c2.z);
       }
     }
-    strokeWeight(4);
+    strokeWeight(6);
     stroke(50);
     point(c1.x, c1.y, c1.z);
   }
