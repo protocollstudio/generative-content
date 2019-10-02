@@ -14,7 +14,7 @@
 ## global
 
 - split update and draw function : is there a way to do it natively ?
-- generate dynamically
+- create a home page with sketches list generated dynamically
 - solve AudioContext error
 
 ## sub-projects
