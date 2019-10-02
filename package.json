@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "p5": "^0.9.0",
+    "lodash": "^4.17.15",
     "webmidi": "^2.5.1"
   },
   "devDependencies": {

@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "allowSyntheticDefaultImports": false,
+        "baseUrl": "./",
+        "paths": {
+            "Modules/*": [
+                "modules/*"
+            ],
+            "Node/*": [
+                "node_modules/*"
+            ],
+            "Assets/*": [
+                "assets/*"
+            ],
+            "Sketches/*": [
+                "sketches/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

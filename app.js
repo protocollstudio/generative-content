@@ -1,10 +1,11 @@
-import p5 from 'p5';
-import "p5/lib/addons/p5.sound";
+import p5 from 'Node/p5';
+import "Node/p5/lib/addons/p5.sound";
+import "Node/lodash";
 
 // sketches list
 
-import * as randomLines from "./random-lines/js/sketch.js"
-import * as glowingTiles from "./glowing-tiles/js/sketch.js"
+import * as randomLines from "Sketches/random-lines/sketch.js"
+import * as glowingTiles from "Sketches/glowing-tiles/sketch.js"
 
 let currentSketch = glowingTiles; // use the sketch you want to see :)
 

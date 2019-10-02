@@ -15,8 +15,10 @@ module.exports = {
   },
   mode: "development",
   watch: true,
+  devtool: "source-map",
   resolve: {
     alias: {
+      Sketches: path.resolve(__dirname, 'sketches/'),
       Modules: path.resolve(__dirname, 'modules/'),
       Node: path.resolve(__dirname, 'node_modules/'),
       Assets: path.resolve(__dirname, 'assets/')
