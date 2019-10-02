@@ -28,3 +28,5 @@ class Global {
     this.frame = 1;
   }
 }
+
+export let global = new Global();

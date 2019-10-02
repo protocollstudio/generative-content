@@ -15,3 +15,5 @@ class Grid {
    }
   }
 }
+
+export let grid = new Grid();
