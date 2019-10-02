@@ -7,15 +7,21 @@ import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
 import { configuration } from "./Configuration.js";
 import { rectangleManager } from "./RectangleManager.js";
 
+export {
+  preload,
+  setup,
+  draw,
+  keyPressed
+};
 
-export function preload() {
+function preload() {
   if (getAudioContext().state !== 'running') {
     getAudioContext().resume();
   }
   audioReactiveManager.preload();
 }
 
-export function setup() {
+function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   rectMode(CENTER);
@@ -30,15 +36,15 @@ export function setup() {
   midiManager.setup();
 }
 
-export function draw() {
+function draw() {
   background(0);
   rectangleManager.draw();
   audioReactiveManager.analyse()
-                      .processSound();
+    .processSound();
   parametersPanelManager.draw(getParameters());
 }
 
-export function keyPressed() {
+function keyPressed() {
   parametersPanelManager.keyPressed();
 }
 

@@ -5,7 +5,13 @@ import { midiManager } from "Modules/midi/MidiManager.js"
 
 import { lineManager } from "./LineManager.js";
 
-export function setup() {
+export {
+  setup,
+  draw,
+  keyPressed
+};
+
+function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   lineManager.generateLineList();
@@ -14,17 +20,17 @@ export function setup() {
   midiManager.setup();
 }
 
-export function draw() {
+function draw() {
   background(0);
   lineManager.draw();
   parametersPanelManager.draw(getParameters());
 }
 
-export function keyPressed() {
+function keyPressed() {
   parametersPanelManager.keyPressed();
 }
 
-export function getParameters() {
+function getParameters() {
   return [
     ["jumpProbability", lineManager.jumpProbability],
     ["jumpDistance", lineManager.jumpDistance],
