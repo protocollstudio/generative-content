@@ -6,3 +6,7 @@ collection of generative-content
 [example 2](https://www.youtube.com/watch?v=IwE2bmgQbOI)
 
 ## random-lines
+
+## milestones
+
+- dependance injections in class constructors
