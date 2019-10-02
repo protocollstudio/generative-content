@@ -1,5 +1,5 @@
 import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
-import { configuration } from "./configuration.js"
+import { configuration } from "./configuration.js.js"
 
 export { setup, draw };
 
