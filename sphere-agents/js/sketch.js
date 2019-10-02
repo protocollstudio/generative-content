@@ -1,5 +1,5 @@
 import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
-import { configuration } from "./configuration.js.js"
+import { configuration } from "./configuration.js"
 
 export { setup, draw };
 
@@ -26,7 +26,10 @@ function draw() {
   background(configuration.bgColor);
 
   // camera setup
-  createCamera();
+  let cam = createCamera();
+  setCamera(cam);
+  rotateX(radians(mouseY));
+  rotateY(radians(mouseX));
 
   let radius = 300;
 
