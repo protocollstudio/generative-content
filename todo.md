@@ -4,6 +4,8 @@
 
 - use [browser-sync-webpack-plugin](https://www.npmjs.com/package/browser-sync-webpack-plugin "browser-sync-webpack-plugin")
 - use webmidi as node dependency
+- ~debundler sources for debug~
+- ~use jsconfig.json to resolve webpack resolvers in dependencies path~
 - ~general serve (not in projects folder but at root)~
 - ~all general code in a repertory~
 - ~all modules code in a repertory~

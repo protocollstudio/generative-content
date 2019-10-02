@@ -15,6 +15,7 @@ module.exports = {
   },
   mode: "development",
   watch: true,
+  devtool: "source-map",
   resolve: {
     alias: {
       Modules: path.resolve(__dirname, 'modules/'),
