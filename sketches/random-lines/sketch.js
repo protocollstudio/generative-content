@@ -5,6 +5,12 @@ import { midiManager } from "Modules/midi/MidiManager.js"
 
 import { lineManager } from "./LineManager.js";
 
+export {
+  setup,
+  draw,
+  keyPressed
+};
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
@@ -17,30 +23,25 @@ function setup() {
 function draw() {
   background(0);
   lineManager.draw();
-  parametersPanelManager.print(getParameters());
+  parametersPanelManager.draw(getParameters());
 }
 
 function keyPressed() {
-  console.log("keypressed");
-  if (keyCode == ENTER) {
-    parametersPanelManager.changeVisibility();
-  }
+  parametersPanelManager.keyPressed();
 }
 
 function getParameters() {
   return [
-    ["jumpProbability", lineManager.jumpProbability],
-    ["jumpDistance", lineManager.jumpDistance],
-    ["jumpDistanceRoom", lineManager.jumpDistanceRoom],
-
-    ["bendProbability", lineManager.bendProbability],
-    ["bendDuration", lineManager.bendDuration],
-    ["bendAmplitude", lineManager.bendAmplitude],
-    ["bendAmplitudeRoom", lineManager.bendAmplitudeRoom],
-
-    ["lineNumberMax", lineManager.lineNumberMax],
-    ["line number", lineManager.lineList.length],
-    ["aberationProbability", lineManager.aberationProbability]
+    parametersPanelManager.createParameter("jumpProbability", lineManager, "jumpProbability"),
+    parametersPanelManager.createParameter("jumpDistance", lineManager, "jumpDistance"),
+    parametersPanelManager.createParameter("jumpDistanceRoom", lineManager, "jumpDistanceRoom"),
+    parametersPanelManager.createParameter("bendProbability", lineManager, "bendProbability"),
+    parametersPanelManager.createParameter("bendDuration", lineManager, "bendDuration"),
+    parametersPanelManager.createParameter("bendAmplitude", lineManager, "bendAmplitude"),
+    parametersPanelManager.createParameter("bendAmplitudeRoom", lineManager, "bendAmplitudeRoom"),
+    parametersPanelManager.createParameter("lineNumberMax", lineManager, "lineNumberMax"),
+    parametersPanelManager.createParameter("line number", lineManager, "lineList.length"),
+    parametersPanelManager.createParameter("aberationProbability", lineManager, "aberationProbability")
   ];
 }
 
@@ -54,8 +55,3 @@ function setupMidi() {
   midiMixController.addControlWithValues(EVENT.TRACK_02_KNOB_01, lineManager, "jumpDistance", 0, 100);
   midiMixController.addControlWithValues(EVENT.TRACK_02_KNOB_02, lineManager, "jumpDistanceRoom", 0, 100); //lineManager.jumpDistance
 }
-
-//window.preload = preload;
-window.setup = setup;
-window.draw = draw;
-window.keyPressed = keyPressed;

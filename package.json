@@ -1,8 +1,8 @@
 {
-  "name": "random-lines",
-  "version": "1.0.0",
+  "name": "generative-content",
+  "version": "0.1.0",
   "description": "",
-  "main": "sketch.js",
+  "main": "app.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
     "start-browser-sync": "browser-sync start --server -f -w"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "p5": "^0.9.0",
+    "lodash": "^4.17.15",
     "webmidi": "^2.5.1"
   },
   "devDependencies": {

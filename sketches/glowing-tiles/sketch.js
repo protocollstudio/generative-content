@@ -7,6 +7,12 @@ import { parametersPanelManager } from "Modules/ParametersPanelManager.js";
 import { configuration } from "./Configuration.js";
 import { rectangleManager } from "./RectangleManager.js";
 
+export {
+  preload,
+  setup,
+  draw,
+  keyPressed
+};
 
 function preload() {
   if (getAudioContext().state !== 'running') {
@@ -22,7 +28,7 @@ function setup() {
   background(0);
   frameRate(25);
 
-  configuration.init();
+  configuration.setup();
   parametersPanelManager.setup(false);
   rectangleManager.setup();
   audioReactiveManager.setup();
@@ -33,33 +39,27 @@ function setup() {
 function draw() {
   background(0);
   rectangleManager.draw();
-  audioReactiveManager.analyse().processSound();
-  parametersPanelManager.print(getParameters());
+  audioReactiveManager.analyse()
+    .processSound();
+  parametersPanelManager.draw(getParameters());
 }
 
-// PANEL
-
 function keyPressed() {
-  if (keyCode == ENTER) {
-    parametersPanelManager.changeVisibility();
-  }
+  parametersPanelManager.keyPressed();
 }
 
 function getParameters() {
   return [
-    ["[1.S] scaleChance", rectangleManager.scaleChance],
-    ["[1.1] scaleAmountMin", rectangleManager.scaleAmountMin],
-    ["[1.2] scaleAmountMax", rectangleManager.scaleAmountMax],
-    ["rectScaleInitMin", rectangleManager.rectScaleInitMin],
-    ["rectScaleInitMax", rectangleManager.rectScaleInitMax],
-
-    ["[2.S] opacityChance", rectangleManager.opacityChance],
-
-    ["[3.S] angleChance", rectangleManager.angleChance],
-    ["[3.1] rotationSpeedMax", rectangleManager.rotationSpeedMax],
-    ["initAnglePerturbation", rectangleManager.initAnglePerturbation],
-
-    ["[M.S] tileSize", configuration.tileSize]
+    parametersPanelManager.createParameter("[1.S] scaleChance", rectangleManager, "scaleChance"),
+    parametersPanelManager.createParameter("[1.1] scaleAmountMin", rectangleManager, "scaleAmountMin"),
+    parametersPanelManager.createParameter("[1.2] scaleAmountMax", rectangleManager, "scaleAmountMax"),
+    parametersPanelManager.createParameter("rectScaleInitMin", rectangleManager, "rectScaleInitMin"),
+    parametersPanelManager.createParameter("rectScaleInitMax", rectangleManager, "rectScaleInitMax"),
+    parametersPanelManager.createParameter("[2.S] opacityChance", rectangleManager, "opacityChance"),
+    parametersPanelManager.createParameter("[3.S] angleChance", rectangleManager, "angleChance"),
+    parametersPanelManager.createParameter("[3.1] rotationSpeedMax", rectangleManager, "rotationSpeedMax"),
+    parametersPanelManager.createParameter("initAnglePerturbation", rectangleManager, "initAnglePerturbation"),
+    parametersPanelManager.createParameter("[M.S] tileSize", configuration, "tileSize")
   ];
 }
 
@@ -72,7 +72,3 @@ function setupMidi() {
   midiMixController.addControl(EVENT.TRACK_03_SLIDER, rectangleManager, "angleChance");
   midiMixController.addControlWithValues(EVENT.TRACK_03_KNOB_01, rectangleManager, "rotationSpeedMax", 1, 50);
 }
-
-window.preload = preload;
-window.setup = setup;
-window.draw = draw;

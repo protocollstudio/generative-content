@@ -1,33 +1,24 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-11 14:44:33
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 16:09:06
-*/
-
 import p5 from 'p5';
-// import { configuration } from "./Configuration.js";
 // impossible d'importer un module spécifique dans un module générique ! anyé !
 
 class AudioReactiveManager {
 
-  constructor(soundFilePath = 'Assets/lille.mp3') {
-    this.soundFilePath = soundFilePath;
-    this.soundAvg = 0
+  constructor() {
     return this;
   }
 
-  preload() {
+  preload(soundFilePath = 'Assets/lille.mp3') {
+    this.soundFilePath = `Assets/${this.getRandomSoundName()}`;
     this.sound = loadSound(this.soundFilePath);
-    console.log(loadSound);
     return this;
   }
 
   setup() {
+    this.soundAvg = 0;
     this.fft = new p5.FFT();
     this.sound.amp(1);
     this.sound.play();
-    this.sound.jump(120, 5);
+    //this.sound.jump(int(random(120, 300)), 2);
     return this;
   }
 
@@ -67,6 +58,15 @@ class AudioReactiveManager {
     // configuration.soundAvg = this.soundAvg;
 
     return this;
+  }
+
+  getRandomSoundName() {
+    let soundNameList = [
+      "fanfare-trumpets.mp3",
+      "success.wav",
+      "success-jingle.wav"
+    ];
+    return soundNameList[int(random(0, soundNameList.length - 1))];
   }
 
 }
