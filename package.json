@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "npm run-script start-webpack",
     "start-webpack": "webpack-dev-server",
     "start-browser-sync": "browser-sync start --server -f -w"
   },
