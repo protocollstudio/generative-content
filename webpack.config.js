@@ -8,7 +8,8 @@
 var path = require("path");
 
 module.exports = {
-  entry: "./app.js",
+  // context: __dirname + "/src",
+	entry: "./app.js",
   output: {
     path: path.resolve(__dirname),
     filename: "bundle.js"
@@ -18,7 +19,7 @@ module.exports = {
   devtool: "source-map",
   resolve: {
     alias: {
-      Sketches: path.resolve(__dirname, 'sketches/'),
+      Sketches: path.resolve(__dirname, 'src/sketches/'),
       Modules: path.resolve(__dirname, 'modules/'),
       Node: path.resolve(__dirname, 'node_modules/'),
       Assets: path.resolve(__dirname, 'assets/')

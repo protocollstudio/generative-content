@@ -14,7 +14,7 @@
                 "assets/*"
             ],
             "Sketches/*": [
-                "sketches/*"
+                "src/sketches/*"
             ]
         }
     },
