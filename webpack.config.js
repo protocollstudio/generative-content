@@ -1,9 +1,3 @@
-/*
-* @Author: OMAO
-* @Date:   2019-09-19 23:18:38
-* @Last Modified by:   OMAO
-* @Last Modified time: 2019-09-20 15:00:22
-*/
 
 var path = require("path");
 
@@ -11,7 +5,7 @@ module.exports = {
   // context: __dirname + "/src",
 	entry: "./app.js",
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, "public"),
     filename: "bundle.js"
   },
   mode: "development",
@@ -26,3 +20,26 @@ module.exports = {
     }
   }
 };
+
+// module.exports = {
+// 	entry: './js/app.js',
+// 	output: {
+// 		filename: 'app.js',
+// 		path: path.resolve(__dirname, 'public')
+// 	},
+// 	devServer: {
+// 		contentBase: './public'
+//   },
+//   devtool: "source-map",
+// 	module: {
+// 		rules: [
+// 			{
+// 				test: /\.(js|jsx)$/,
+// 				exclude: /node_modules/,
+// 				use: {
+// 					loader: 'babel-loader'
+// 				}
+// 			}
+// 		]
+//   }
+// };

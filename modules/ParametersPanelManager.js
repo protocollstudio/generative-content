@@ -1,5 +1,5 @@
 class ParametersPanelManager {
-  setup(isVisible = false) {
+  setup(isVisible = false, panelWidth = 600, panelHeight = 600, alpha = 150) {
 
     this.isVisible = isVisible;
 
@@ -12,9 +12,9 @@ class ParametersPanelManager {
     this.xOffset = 40;
     this.yOffset = this.titleTextSize + 20;
 
-    this.panelBgColor = color(0, 0, 0, 250);
-    this.panelWidth = 600;
-    this.panelHeight = 600;
+    this.panelBgColor = color(0, 0, 0, alpha);
+    this.panelWidth = panelWidth;
+    this.panelHeight = panelHeight;
 
     this.panelTextColor = color(0, 200, 153);
 

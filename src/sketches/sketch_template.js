@@ -1,11 +1,5 @@
 import { util } from "Modules/Util";
 
-export {
-  setup,
-  draw,
-  keyPressed
-};
-
 function setup() {
   createCanvas(800, 400);
 }
@@ -17,3 +11,9 @@ function draw() {
 function keyPressed() {
   util.saveOnKeyPressed();
 }
+
+export {
+  setup,
+  draw,
+  keyPressed
+};
